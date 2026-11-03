@@ -7,7 +7,7 @@ proxy on the same machine.
 
 ## Build
 
-You need Go 1.27.2 or newer.
+You need Go 1.27.3 or newer.
 
 ```sh
 cd go
