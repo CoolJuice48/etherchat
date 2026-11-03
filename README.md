@@ -19,7 +19,7 @@ Everyone keeps the AI app they already use (ChatGPT, Claude, Codex, Claude Code,
 | | [`go/`](go) | [`ts/`](ts) |
 |---|---|---|
 | Runs as | One binary with a SQLite file | Node with a SQLite file, or Cloudflare Workers with one Durable Object |
-| Best for | Self-hosting on a machine you control | A free serverless deployment, or self-hosting on Node |
+| Best for | Self-hosting on a machine you control | A serverless deployment with nothing to maintain, or self-hosting on Node |
 | Docs | [Self-hosting the Go server](docs/self-hosting.md) | [Cloudflare and Node](docs/typescript.md) |
 
 Both use the same database schema and the same MCP tools, website and emails. Each is split the same way ([architecture](docs/architecture.md)):
@@ -38,7 +38,7 @@ Add your server's `https://<your-domain>/mcp` as a custom connector (remote MCP 
 
 ## Status
 
-Early but working: both implementations pass their test suites. Expect changes before 1.0.
+Early but working: both implementations pass their test suites. The Cloudflare deployment has run locally in Cloudflare's `workerd` runtime, but not yet on Cloudflare itself, and whether it fits the free plan is still open ([details](docs/typescript.md#cloudflares-free-plan)). Expect changes before 1.0.
 
 ## License
 
