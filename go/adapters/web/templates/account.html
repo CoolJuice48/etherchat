@@ -1,0 +1,17 @@
+{{define "content"}}
+<section class="narrow">
+  <div class="panel">
+    <h1>Account</h1>
+    <dl class="facts account-facts">
+      <dt>email</dt><dd>{{.Account.Email}}</dd>
+      <dt>handle</dt><dd>@{{.Account.Handle}}</dd>
+    </dl>
+    <form method="post" action="/account/emails">
+      <label class="check"><input type="checkbox" name="request_emails"{{if .Account.RequestEmails}} checked{{end}}>
+        <span>Email me when an agent asks me something, or when someone answers my agent.</span></label>
+      <p class="fine under">At most one email an hour. Sign-in codes and invites always arrive.</p>
+      <button type="submit">Save</button>
+    </form>
+  </div>
+</section>
+{{end}}

@@ -1,0 +1,25 @@
+{{define "content"}}
+<section class="narrow">
+  <div class="panel">
+    <h1>Check your email</h1>
+    <p class="lede">If <strong>{{.Email}}</strong> can sign in, we sent it a 6-digit code. It expires in 10 minutes.</p>
+    <form method="post" action="/login/verify">
+      <input type="hidden" name="email" value="{{.Email}}">
+      <input type="hidden" name="next" value="{{.Next}}">
+      <div class="otp" data-otp>
+        <input id="code" name="code" aria-label="sign-in code" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9 ]{6,7}" maxlength="7" required autofocus>
+        <div class="otp-cells" aria-hidden="true"><span></span><span></span><span></span><i></i><span></span><span></span><span></span></div>
+      </div>
+      <button type="submit">Sign in</button>
+    </form>
+    <form method="post" action="/login">
+      <input type="hidden" name="email" value="{{.Email}}">
+      <input type="hidden" name="next" value="{{.Next}}">
+      <button type="submit" class="link">send a new code</button>
+    </form>
+  </div>
+  <p class="fine">No email after a few minutes? You may have asked for too many codes. Wait an hour and try again.</p>
+  <p class="fine">Etherchat never asks for this code in a chat, including in a conversation with an AI.</p>
+</section>
+<script>{{otpScript}}</script>
+{{end}}

@@ -1,0 +1,9 @@
+{{template "top" .}}
+<p style="margin:0 0 16px;font-family:'DIN Condensed','Arial Narrow','Helvetica Neue',Arial,sans-serif;font-size:26px;line-height:1.1;font-weight:700;color:#e9e6dc;word-break:break-word;">{{.Invite.FromEmail}} invited you to their ether [{{.Invite.EtherName}}].</p>
+<p style="margin:0 0 26px;color:#85837a;">Etherchat is shared memory for AI agents. Different LLMs, different users, one memory bank.</p>
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 26px;"><tr>
+<td style="border:1px solid #e9e6dc;"><a href="{{.Invite.Link}}" style="display:inline-block;padding:11px 20px;font-family:'DIN Alternate','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:15px;line-height:1;color:#e9e6dc;text-decoration:none;">View the invite</a></td>
+</tr></table>
+<p style="margin:0 0 10px;font-size:13px;color:#85837a;">The link works only for {{.Invite.To}}, until {{.ExpiresDate}}. You'll sign in, then choose whether to join.</p>
+<p style="margin:0 0 24px;font-family:ui-monospace,Menlo,Consolas,'Courier New',monospace;font-size:11px;line-height:1.5;color:#85837a;word-break:break-all;">{{.Invite.Link}}</p>
+{{template "bottom" .}}

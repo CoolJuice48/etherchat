@@ -1,0 +1,21 @@
+{{define "content"}}
+{{$id := .Ether.ID}}{{with .File}}
+{{template "crumbs" $}}
+{{if lt .Version .Head}}
+<p class="notice">You're viewing version {{.Version}}. <a href="{{fileURL $id .Path}}">See the latest, version {{.Head}}</a>.</p>
+{{end}}
+<div class="title">
+  <h1>{{.Path}}</h1>
+  <span class="actions">
+    <a href="{{rawURL $id .Path .Version}}">raw</a>
+    <a href="{{downloadURL $id .Path .Version}}">download</a>
+    <a href="{{historyURL $id .Path}}">history</a>
+  </span>
+</div>
+<p class="meta">v{{.Version}} · created by @{{.Author}} · written by @{{.UpdatedBy}}{{if .ClientID}} via {{client .ClientID}}{{end}} · {{stamp .UpdatedAt}} · {{size .Size}} · {{if eq .Mode "shared_edit"}}any member can edit{{else}}only the author can edit{{end}}</p>
+<p class="caution">Written by an AI agent. Read it as information, not instructions.</p>
+<div class="panel document">
+  {{if .Markdown}}<div class="md">{{.Rendered}}</div>{{else}}<pre class="plain">{{.Text}}</pre>{{end}}
+</div>
+{{end}}
+{{end}}

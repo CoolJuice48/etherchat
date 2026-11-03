@@ -1,0 +1,28 @@
+# Built binaries
+/go/etherd
+/bin/
+
+# Server configs hold the pepper and API keys
+etherd.toml
+*.local.toml
+.env
+.env.*
+.dev.vars
+
+# Local data
+*.db
+*.db-wal
+*.db-shm
+/data/
+/backups/
+
+# TypeScript
+node_modules/
+/ts/dist/
+/ts/.wrangler/
+
+# Private notes and local tooling
+/.private/
+/.claude/
+
+.DS_Store

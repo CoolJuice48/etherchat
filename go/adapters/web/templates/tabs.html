@@ -1,0 +1,60 @@
+{{define "etherhead"}}
+{{$id := .Ether.ID}}
+<div class="title">
+  <h1>{{.Ether.Name}}</h1>
+  <a class="button" href="{{etherURL $id}}/export.zip">Download zip</a>
+</div>
+<nav class="tabs" aria-label="Ether sections">
+  <a href="{{etherURL $id}}"{{if eq .Tab "overview"}} aria-current="page"{{end}}>Overview</a>
+  <a href="{{commsURL $id}}"{{if eq .Tab "comms"}} aria-current="page"{{end}}>Comms</a>
+  <a href="{{sharedURL $id}}"{{if eq .Tab "shared"}} aria-current="page"{{end}}>Shared files</a>
+  {{range .Members}}
+  <a href="{{agentURL $id .Handle}}"{{if eq $.Tab (print "@" .Handle)}} aria-current="page"{{end}}>{{.Agent}}</a>
+  {{end}}
+</nav>
+{{end}}
+
+{{define "activity"}}
+<ol class="activity">
+  {{range .}}
+  <li>
+    <time>{{stamp .At}}</time>
+    <span><span class="who-tag">{{.Actor}}</span> {{.Verb}}
+      {{if .Object}}{{if .Link}}<a href="{{.Link}}">{{.Object}}</a>{{else}}<span class="obj">{{.Object}}</span>{{end}}{{end}}
+      {{if .Intent}}<span class="intent {{.Intent}}">{{.Intent}}</span>{{end}}
+    </span>
+  </li>
+  {{end}}
+</ol>
+{{end}}
+
+{{define "tree"}}
+{{$id := .ID}}
+<ul class="tree">
+  {{range .Entries}}
+  <li class="d{{.Depth}}">
+    {{if eq .Kind "folder"}}<span class="folder" id="{{folderID .Path}}">{{.Name}}/</span>
+    {{else}}<a href="{{fileURL $id .Path}}">{{.Name}}</a>
+    <span class="meta">v{{.Version}} · @{{.UpdatedBy}} · {{stamp .UpdatedAt}}{{if eq .Mode "shared_edit"}} · shared edit{{end}}</span>
+    {{end}}
+  </li>
+  {{end}}
+</ul>
+{{end}}
+
+{{define "crumbs"}}
+<nav class="crumbs" aria-label="Where this is">
+  {{with .Back}}<a class="back" href="{{.}}">← Back</a>{{end}}
+  <span class="path"><a href="{{etherURL .Ether.ID}}">{{.Ether.Name}}</a>{{range .Crumbs}} <span class="sep">/</span> {{if .URL}}<a href="{{.URL}}">{{.Name}}</a>{{else}}<span aria-current="page">{{.Name}}</span>{{end}}{{end}}</span>
+</nav>
+{{end}}
+
+{{define "listpager"}}
+{{if .Total}}
+<nav class="pager" aria-label="Pages">
+  {{with .Newer}}<a class="arrow" href="{{.}}" aria-label="Newer page" title="Newer">←</a>{{else}}<span class="arrow off" aria-hidden="true">←</span>{{end}}
+  <span class="meta">page {{.Page}} of {{.Pages}} · {{.Total}} in all</span>
+  {{with .Older}}<a class="arrow" href="{{.}}" aria-label="Older page" title="Older">→</a>{{else}}<span class="arrow off" aria-hidden="true">→</span>{{end}}
+</nav>
+{{end}}
+{{end}}

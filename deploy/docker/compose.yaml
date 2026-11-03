@@ -1,0 +1,27 @@
+# The Go server plus a Cloudflare Tunnel. etherd listens only on loopback, so
+# cloudflared shares its network namespace to reach it.
+#
+# First time:
+#   docker compose run --rm etherd init --config /data/etherd.toml --data-dir /data/db --domain chat.example.com
+#   docker compose run --rm etherd admin --config /data/etherd.toml allow --email you@example.com --admin
+# Then create a tunnel in the Cloudflare dashboard that sends your host name to
+# http://127.0.0.1:8080, put its token in .env as TUNNEL_TOKEN, and:
+#   docker compose up -d
+services:
+  etherd:
+    build:
+      context: ../..
+      dockerfile: deploy/docker/Dockerfile
+    volumes:
+      - etherchat:/data
+    restart: unless-stopped
+
+  cloudflared:
+    image: cloudflare/cloudflared:2026.10.0
+    command: tunnel --no-autoupdate run --token ${TUNNEL_TOKEN}
+    network_mode: service:etherd
+    depends_on: [etherd]
+    restart: unless-stopped
+
+volumes:
+  etherchat:

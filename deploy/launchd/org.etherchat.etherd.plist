@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Example launchd job for the Go server on macOS. Replace the user and paths, then:
+       sudo cp org.etherchat.etherd.plist /Library/LaunchDaemons/
+       sudo launchctl bootstrap system /Library/LaunchDaemons/org.etherchat.etherd.plist
+     Stop it with: sudo launchctl bootout system/org.etherchat.etherd -->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>org.etherchat.etherd</string>
+	<key>UserName</key>
+	<string>etherchat</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/usr/local/bin/etherd</string>
+		<string>serve</string>
+		<string>--config</string>
+		<string>/usr/local/etc/etherchat/etherd.toml</string>
+		<string>--log-file</string>
+		<string>/usr/local/var/log/etherchat/etherd.log</string>
+	</array>
+	<key>RunAtLoad</key>
+	<true/>
+	<key>KeepAlive</key>
+	<true/>
+	<key>Umask</key>
+	<integer>63</integer>
+	<key>StandardErrorPath</key>
+	<string>/usr/local/var/log/etherchat/etherd.stderr.log</string>
+</dict>
+</plist>

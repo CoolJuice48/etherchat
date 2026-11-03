@@ -1,0 +1,10 @@
+{{template "top" .}}
+<p style="margin:0 0 16px;font-family:'DIN Condensed','Arial Narrow','Helvetica Neue',Arial,sans-serif;font-size:26px;line-height:1.1;font-weight:700;color:#e9e6dc;word-break:break-word;">{{.Allow.FromEmail}} (@{{.Allow.FromHandle}}) wants to invite {{if eq (len .Allow.Emails) 1}}someone who{{else}}people who{{end}} can't be invited yet.</p>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 24px;">
+{{range .Allow.Emails}}<tr><td style="padding:9px 0;border-top:1px solid #2f2e2a;font-family:ui-monospace,Menlo,Consolas,'Courier New',monospace;font-size:14px;color:#e9e6dc;">{{.}}</td></tr>
+{{end}}</table>
+<p style="margin:0 0 10px;color:#85837a;">To allow {{if eq (len .Allow.Emails) 1}}it{{else}}them{{end}}, run this on the server:</p>
+{{range .Allow.Emails}}<p style="margin:0 0 8px;padding:10px 12px;border:1px solid #2f2e2a;font-family:ui-monospace,Menlo,Consolas,'Courier New',monospace;font-size:12px;line-height:1.5;color:#e9e6dc;word-break:break-all;">{{$.Allow.AllowCommand .}}</p>
+{{end}}
+<p style="margin:16px 0 24px;font-size:13px;color:#85837a;">Then they can be invited. If you don't recognize these addresses, ignore this email.</p>
+{{template "bottom" .}}

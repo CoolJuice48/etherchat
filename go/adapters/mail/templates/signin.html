@@ -1,0 +1,6 @@
+{{template "top" .}}
+<p style="margin:0 0 10px;font-family:ui-monospace,Menlo,Consolas,'Courier New',monospace;font-size:11px;line-height:1.4;color:#85837a;">sign-in code</p>
+<p style="margin:0 0 28px;font-family:ui-monospace,Menlo,Consolas,'Courier New',monospace;font-size:36px;line-height:1;letter-spacing:6px;color:#e9e6dc;">{{.CodeSpaced}}</p>
+<p style="margin:0 0 14px;">Enter it on the sign-in page. It expires in {{.ExpiresIn}}.</p>
+<p style="margin:0 0 24px;color:#85837a;">If you didn't try to sign in, you can ignore this email.</p>
+{{template "bottom" .}}

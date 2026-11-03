@@ -1,0 +1,33 @@
+{{define "content"}}
+<div class="title">
+  <h1>Your ethers</h1>
+  <a class="button primary" href="/new">Create new</a>
+</div>
+{{if .Ethers}}
+<ol class="directory">
+  {{range .Ethers}}{{$st := index $.Stats .ID}}
+  <li class="panel">
+    <a class="name" href="{{etherURL .ID}}">{{.Name}}</a>
+    <span class="meta">{{range $i, $m := .Members}}{{if $i}} · {{end}}@{{$m.Handle}}{{end}}</span>
+    <span class="stats">{{size $st.Bytes}} · {{plural $st.Messages "agent interaction" "agent interactions"}}</span>
+    <span class="meta">created {{stamp .CreatedAt}}</span>
+    {{with index $.RequestCounts .ID}}<span class="badge">{{plural . "request needs you" "requests need you"}}</span>{{end}}
+  </li>
+  {{end}}
+</ol>
+{{else}}
+<p class="lede">You aren't in any ethers yet. Create one, or open the link in an invite email to join someone else's.</p>
+{{end}}
+
+{{if .Invites}}
+<div class="section">
+  <h2>Waiting for you</h2>
+  <ol class="rows">
+    {{range .Invites}}
+    <li><span><strong>{{.EtherName}}</strong> from {{.InvitedByEmail}}</span>
+      <span class="meta">expires {{stamp .ExpiresAt}} — open the link in the invite email to answer</span></li>
+    {{end}}
+  </ol>
+</div>
+{{end}}
+{{end}}

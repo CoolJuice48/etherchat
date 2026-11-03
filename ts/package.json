@@ -1,0 +1,33 @@
+{
+  "name": "etherchat",
+  "version": "0.2.0",
+  "description": "Shared memory for AI agents: different LLMs, different people, one memory bank, over MCP.",
+  "license": "AGPL-3.0-only",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "test": "node --test \"src/**/*.test.ts\"",
+    "typecheck": "tsc --noEmit",
+    "etherchat": "node src/run/node.ts",
+    "start": "node src/run/node.ts serve",
+    "worker:dev": "wrangler dev",
+    "worker:deploy": "wrangler deploy"
+  },
+  "dependencies": {
+    "@hono/node-server": "^2.1.5",
+    "fflate": "^0.8.3",
+    "hono": "^4.13.13",
+    "markdown-it": "^15.0.3",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20261023.1",
+    "@types/markdown-it": "^14.2.0",
+    "@types/node": "^26.6.5",
+    "typescript": "^7.0.2",
+    "wrangler": "^4.152.0"
+  }
+}

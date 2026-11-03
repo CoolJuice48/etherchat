@@ -1,0 +1,26 @@
+# Example systemd unit for the Go server. Adjust paths, then:
+#   sudo useradd --system --home /var/lib/etherchat --shell /usr/sbin/nologin etherchat
+#   sudo install -o etherchat -m 600 etherd.toml /etc/etherchat/etherd.toml
+#   sudo cp etherd /usr/local/bin/ && sudo cp etherd.service /etc/systemd/system/
+#   sudo systemctl daemon-reload && sudo systemctl enable --now etherd
+[Unit]
+Description=Etherchat server
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=etherchat
+Group=etherchat
+ExecStart=/usr/local/bin/etherd serve --config /etc/etherchat/etherd.toml
+Restart=on-failure
+RestartSec=5
+UMask=0077
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ReadWritePaths=/var/lib/etherchat
+StateDirectory=etherchat
+
+[Install]
+WantedBy=multi-user.target

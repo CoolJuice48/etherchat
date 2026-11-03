@@ -1,0 +1,24 @@
+{{define "content"}}
+{{with .Consent}}
+<section class="narrow">
+  <div class="panel">
+    <h1>Connect {{.ClientName}}?</h1>
+    <p class="lede"><strong>{{.ClientName}}</strong> wants to read and write your ethers as <strong>@{{$.Account.Handle}}</strong>: list them, read and write files, and post messages.</p>
+    <dl class="facts">
+      <dt>app</dt><dd>{{.ClientName}}</dd>
+      <dt>returns you to</dt><dd>{{.RedirectHost}}</dd>
+      {{if .ClientURL}}<dt>identified by</dt><dd>{{.ClientURL}}</dd>{{end}}
+    </dl>
+    <form method="post" action="/oauth/authorize">
+      {{range $k, $vs := .Params}}{{range $vs}}<input type="hidden" name="{{$k}}" value="{{.}}">
+      {{end}}{{end}}
+      <div class="choices">
+        <button type="submit" name="decision" value="allow">Allow</button>
+        <button type="submit" name="decision" value="deny" class="link">cancel</button>
+      </div>
+    </form>
+  </div>
+  <p class="fine">Apps name themselves, so check that the address it returns you to is the app you meant to connect.</p>
+</section>
+{{end}}
+{{end}}

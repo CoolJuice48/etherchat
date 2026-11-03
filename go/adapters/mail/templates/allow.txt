@@ -1,0 +1,12 @@
+{{.Allow.FromEmail}} (@{{.Allow.FromHandle}}) wants to invite {{if eq (len .Allow.Emails) 1}}someone who{{else}}people who{{end}} can't be invited yet:
+{{range .Allow.Emails}}
+  {{.}}{{end}}
+
+To allow {{if eq (len .Allow.Emails) 1}}it{{else}}them{{end}}, run this on the server:
+{{range .Allow.Emails}}
+  {{$.Allow.AllowCommand .}}{{end}}
+
+Then they can be invited. If you don't recognize these addresses, ignore this email.
+
+--
+{{.Footer}}

@@ -1,0 +1,2950 @@
+[
+ {
+  "name": "get",
+  "request": {
+   "method": "GET",
+   "headers": {
+    "Accept": "application/json, text/event-stream"
+   }
+  },
+  "response": {
+   "status": 405,
+   "headers": {
+    "content-type": "text/plain; charset=utf-8",
+    "allow": "POST"
+   },
+   "body": "Method Not Allowed\n"
+  }
+ },
+ {
+  "name": "get-sse",
+  "request": {
+   "method": "GET",
+   "headers": {
+    "Accept": "text/event-stream"
+   }
+  },
+  "response": {
+   "status": 405,
+   "headers": {
+    "content-type": "text/plain; charset=utf-8",
+    "allow": "POST"
+   },
+   "body": "Method Not Allowed\n"
+  }
+ },
+ {
+  "name": "delete",
+  "request": {
+   "method": "DELETE",
+   "headers": {
+    "Accept": "*/*"
+   }
+  },
+  "response": {
+   "status": 405,
+   "headers": {
+    "content-type": "text/plain; charset=utf-8",
+    "allow": "POST"
+   },
+   "body": "Method Not Allowed\n"
+  }
+ },
+ {
+  "name": "put",
+  "request": {
+   "method": "PUT",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{}"
+  },
+  "response": {
+   "status": 405,
+   "headers": {
+    "content-type": "text/plain; charset=utf-8",
+    "allow": "POST"
+   },
+   "body": "Method Not Allowed\n"
+  }
+ },
+ {
+  "name": "options",
+  "request": {
+   "method": "OPTIONS",
+   "headers": {
+    "Accept": "*/*"
+   }
+  },
+  "response": {
+   "status": 405,
+   "headers": {
+    "content-type": "text/plain; charset=utf-8",
+    "allow": "POST"
+   },
+   "body": "Method Not Allowed\n"
+  }
+ },
+ {
+  "name": "no-content-type",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"ping\"}"
+  },
+  "response": {
+   "status": 415,
+   "headers": {
+    "content-type": "text/plain; charset=utf-8"
+   },
+   "body": "Content-Type must be 'application/json'\n"
+  }
+ },
+ {
+  "name": "text-plain",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"ping\"}"
+  },
+  "response": {
+   "status": 415,
+   "headers": {
+    "content-type": "text/plain; charset=utf-8"
+   },
+   "body": "Content-Type must be 'application/json'\n"
+  }
+ },
+ {
+  "name": "ct-charset",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json; charset=utf-8",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"ping\"}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{}}"
+  }
+ },
+ {
+  "name": "ct-upper",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "Application/JSON",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"ping\"}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{}}"
+  }
+ },
+ {
+  "name": "ct-bad-param",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json; charset",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"ping\"}"
+  },
+  "response": {
+   "status": 415,
+   "headers": {
+    "content-type": "text/plain; charset=utf-8"
+   },
+   "body": "Content-Type must be 'application/json'\n"
+  }
+ },
+ {
+  "name": "no-accept",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "*/*"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"ping\"}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{}}"
+  }
+ },
+ {
+  "name": "accept-json-only",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"ping\"}"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "text/plain; charset=utf-8"
+   },
+   "body": "Accept must contain both 'application/json' and 'text/event-stream'\n"
+  }
+ },
+ {
+  "name": "accept-star",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "*/*"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"ping\"}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{}}"
+  }
+ },
+ {
+  "name": "accept-wild",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/*;q=0.9, text/*"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"ping\"}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{}}"
+  }
+ },
+ {
+  "name": "bad-version",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream",
+    "Mcp-Protocol-Version": "1999-01-01"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"ping\"}"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "text/plain; charset=utf-8"
+   },
+   "body": "Bad Request: Unsupported protocol version (supported versions: 2026-07-28,2025-11-25,2025-06-18,2025-03-26,2024-11-05)\n"
+  }
+ },
+ {
+  "name": "future-version",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream",
+    "Mcp-Protocol-Version": "2027-01-01"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"ping\"}"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"error\":{\"code\":-32602,\"message\":\"missing or invalid _meta field \\\"io.modelcontextprotocol/protocolVersion\\\"\"}}"
+  }
+ },
+ {
+  "name": "future-version-tools-list",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream",
+    "Mcp-Protocol-Version": "2027-01-01",
+    "Mcp-Method": "tools/list"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/list\",\"params\":{\"_meta\":{\"io.modelcontextprotocol/protocolVersion\":\"2027-01-01\",\"io.modelcontextprotocol/clientCapabilities\":{}}}}"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"error\":{\"code\":-32022,\"message\":\"unsupported protocol version\",\"data\":{\"supported\":[\"2026-07-28\",\"2025-11-25\",\"2025-06-18\",\"2025-03-26\",\"2024-11-05\"],\"requested\":\"2027-01-01\"}}}"
+  }
+ },
+ {
+  "name": "empty-body",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": ""
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "text/plain; charset=utf-8"
+   },
+   "body": "POST requires a non-empty body\n"
+  }
+ },
+ {
+  "name": "bad-json",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "text/plain; charset=utf-8"
+   },
+   "body": "malformed payload: unmarshaling jsonrpc message: unexpected EOF\n"
+  }
+ },
+ {
+  "name": "not-object",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "42"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "text/plain; charset=utf-8"
+   },
+   "body": "malformed payload: unmarshaling jsonrpc message: json: cannot unmarshal \"42\" into Go value of type jsonrpc2.wireDecode\n"
+  }
+ },
+ {
+  "name": "no-jsonrpc",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"id\":1,\"method\":\"ping\"}"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "text/plain; charset=utf-8"
+   },
+   "body": "malformed payload: invalid message version tag \"\"; expected \"2.0\"\n"
+  }
+ },
+ {
+  "name": "jsonrpc-1",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"1.0\",\"id\":1,\"method\":\"ping\"}"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "text/plain; charset=utf-8"
+   },
+   "body": "malformed payload: invalid message version tag \"1.0\"; expected \"2.0\"\n"
+  }
+ },
+ {
+  "name": "bad-id-type",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":true,\"method\":\"ping\"}"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "text/plain; charset=utf-8"
+   },
+   "body": "malformed payload: parse error: invalid ID type bool\n"
+  }
+ },
+ {
+  "name": "obj-id",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":{},\"method\":\"ping\"}"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "text/plain; charset=utf-8"
+   },
+   "body": "malformed payload: parse error: invalid ID type map[string]interface {}\n"
+  }
+ },
+ {
+  "name": "null-id",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":null,\"method\":\"ping\"}"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "text/plain; charset=utf-8"
+   },
+   "body": "invalid request: missing id for \"ping\"\n"
+  }
+ },
+ {
+  "name": "frac-id",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1.7,\"method\":\"ping\"}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{}}"
+  }
+ },
+ {
+  "name": "neg-id",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":-3,\"method\":\"ping\"}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":-3,\"result\":{}}"
+  }
+ },
+ {
+  "name": "exp-id",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1e3,\"method\":\"ping\"}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1000,\"result\":{}}"
+  }
+ },
+ {
+  "name": "str-id",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":\"abc\",\"method\":\"ping\"}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":\"abc\",\"result\":{}}"
+  }
+ },
+ {
+  "name": "empty-str-id",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":\"\",\"method\":\"ping\"}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":\"\",\"result\":{}}"
+  }
+ },
+ {
+  "name": "method-not-string",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":5}"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "text/plain; charset=utf-8"
+   },
+   "body": "malformed payload: unmarshaling jsonrpc message: json: cannot unmarshal \"5\" into Go value of type string\n"
+  }
+ },
+ {
+  "name": "empty-method",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"\"}"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "text/plain; charset=utf-8"
+   },
+   "body": "JSON RPC not handled: \"\" unsupported\n"
+  }
+ },
+ {
+  "name": "no-method-no-id",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\"}"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "text/plain; charset=utf-8"
+   },
+   "body": "malformed payload: invalid request\n"
+  }
+ },
+ {
+  "name": "response-msg",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":9,\"result\":{}}"
+  },
+  "response": {
+   "status": 202,
+   "headers": {},
+   "body": ""
+  }
+ },
+ {
+  "name": "error-msg",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":9,\"error\":{\"code\":1,\"message\":\"x\"}}"
+  },
+  "response": {
+   "status": 202,
+   "headers": {},
+   "body": ""
+  }
+ },
+ {
+  "name": "trailing-garbage",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"ping\"} xyz"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{}}"
+  }
+ },
+ {
+  "name": "dup-key",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"id\":2,\"method\":\"ping\"}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":2,\"result\":{}}"
+  }
+ },
+ {
+  "name": "case-key",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"ID\":1,\"Method\":\"ping\"}"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "text/plain; charset=utf-8"
+   },
+   "body": "malformed payload: invalid request\n"
+  }
+ },
+ {
+  "name": "params-array",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"ping\",\"params\":[]}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"error\":{\"code\":-32602,\"message\":\"handling 'ping': invalid params: unmarshaling \\\"[]\\\" into a *mcp.PingParams: json: cannot unmarshal \\\"[]\\\" into Go value of type mcp.PingParams\"}}"
+  }
+ },
+ {
+  "name": "params-null",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"ping\",\"params\":null}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{}}"
+  }
+ },
+ {
+  "name": "params-string",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/list\",\"params\":\"x\"}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"error\":{\"code\":-32602,\"message\":\"handling 'tools/list': invalid params: unmarshaling \\\"\\\\\\\"x\\\\\\\"\\\" into a *mcp.ListToolsParams: json: cannot unmarshal \\\"\\\\\\\"x\\\\\\\"\\\" into Go value of type mcp.ListToolsParams\"}}"
+  }
+ },
+ {
+  "name": "unknown-method",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"foo/bar\"}"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "text/plain; charset=utf-8"
+   },
+   "body": "JSON RPC not handled: \"foo/bar\" unsupported\n"
+  }
+ },
+ {
+  "name": "unknown-notification",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"method\":\"notifications/foo\"}"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "text/plain; charset=utf-8"
+   },
+   "body": "JSON RPC not handled: \"notifications/foo\" unsupported\n"
+  }
+ },
+ {
+  "name": "initialized-notif",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"method\":\"notifications/initialized\"}"
+  },
+  "response": {
+   "status": 202,
+   "headers": {},
+   "body": ""
+  }
+ },
+ {
+  "name": "cancelled-notif",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"method\":\"notifications/cancelled\",\"params\":{\"requestId\":1}}"
+  },
+  "response": {
+   "status": 202,
+   "headers": {},
+   "body": ""
+  }
+ },
+ {
+  "name": "progress-notif-noparams",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"method\":\"notifications/progress\"}"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "text/plain; charset=utf-8"
+   },
+   "body": "invalid request: missing required \"params\"\n"
+  }
+ },
+ {
+  "name": "roots-notif",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"method\":\"notifications/roots/list_changed\"}"
+  },
+  "response": {
+   "status": 202,
+   "headers": {},
+   "body": ""
+  }
+ },
+ {
+  "name": "notif-as-call",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"notifications/initialized\"}"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "text/plain; charset=utf-8"
+   },
+   "body": "invalid request: unexpected id for \"notifications/initialized\"\n"
+  }
+ },
+ {
+  "name": "call-as-notif",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"method\":\"tools/list\"}"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "text/plain; charset=utf-8"
+   },
+   "body": "invalid request: missing id for \"tools/list\"\n"
+  }
+ },
+ {
+  "name": "ping",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"ping\"}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{}}"
+  }
+ },
+ {
+  "name": "ping-params",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"ping\",\"params\":{\"_meta\":{\"x\":1}}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{}}"
+  }
+ },
+ {
+  "name": "init-0618",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"initialize\",\"params\":{\"protocolVersion\":\"2025-06-18\",\"capabilities\":{},\"clientInfo\":{\"name\":\"x\",\"version\":\"1\"}}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"capabilities\":{\"logging\":{},\"tools\":{\"listChanged\":true}},\"instructions\":\"$INSTRUCTIONS\",\"protocolVersion\":\"2025-06-18\",\"serverInfo\":{\"name\":\"etherchat\",\"title\":\"Etherchat\",\"version\":\"test\"}}}"
+  }
+ },
+ {
+  "name": "init-1105",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"initialize\",\"params\":{\"protocolVersion\":\"2024-11-05\",\"capabilities\":{},\"clientInfo\":{\"name\":\"x\",\"version\":\"1\"}}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"capabilities\":{\"logging\":{},\"tools\":{\"listChanged\":true}},\"instructions\":\"$INSTRUCTIONS\",\"protocolVersion\":\"2024-11-05\",\"serverInfo\":{\"name\":\"etherchat\",\"title\":\"Etherchat\",\"version\":\"test\"}}}"
+  }
+ },
+ {
+  "name": "init-1125",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"initialize\",\"params\":{\"protocolVersion\":\"2025-11-25\",\"capabilities\":{},\"clientInfo\":{\"name\":\"x\",\"version\":\"1\"}}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"capabilities\":{\"logging\":{},\"tools\":{\"listChanged\":true}},\"instructions\":\"$INSTRUCTIONS\",\"protocolVersion\":\"2025-11-25\",\"serverInfo\":{\"name\":\"etherchat\",\"title\":\"Etherchat\",\"version\":\"test\"}}}"
+  }
+ },
+ {
+  "name": "init-0326",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"initialize\",\"params\":{\"protocolVersion\":\"2025-03-26\",\"capabilities\":{},\"clientInfo\":{\"name\":\"x\",\"version\":\"1\"}}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"capabilities\":{\"logging\":{},\"tools\":{\"listChanged\":true}},\"instructions\":\"$INSTRUCTIONS\",\"protocolVersion\":\"2025-03-26\",\"serverInfo\":{\"name\":\"etherchat\",\"title\":\"Etherchat\",\"version\":\"test\"}}}"
+  }
+ },
+ {
+  "name": "init-0728",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"initialize\",\"params\":{\"protocolVersion\":\"2026-07-28\",\"capabilities\":{},\"clientInfo\":{\"name\":\"x\",\"version\":\"1\"}}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"capabilities\":{\"logging\":{},\"tools\":{\"listChanged\":true}},\"instructions\":\"$INSTRUCTIONS\",\"protocolVersion\":\"2025-11-25\",\"serverInfo\":{\"name\":\"etherchat\",\"title\":\"Etherchat\",\"version\":\"test\"}}}"
+  }
+ },
+ {
+  "name": "init-weird",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"initialize\",\"params\":{\"protocolVersion\":\"1999-01-01\",\"capabilities\":{},\"clientInfo\":{\"name\":\"x\",\"version\":\"1\"}}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"capabilities\":{\"logging\":{},\"tools\":{\"listChanged\":true}},\"instructions\":\"$INSTRUCTIONS\",\"protocolVersion\":\"2025-11-25\",\"serverInfo\":{\"name\":\"etherchat\",\"title\":\"Etherchat\",\"version\":\"test\"}}}"
+  }
+ },
+ {
+  "name": "init-empty-params",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"initialize\",\"params\":{}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"capabilities\":{\"logging\":{},\"tools\":{\"listChanged\":true}},\"instructions\":\"$INSTRUCTIONS\",\"protocolVersion\":\"2025-11-25\",\"serverInfo\":{\"name\":\"etherchat\",\"title\":\"Etherchat\",\"version\":\"test\"}}}"
+  }
+ },
+ {
+  "name": "init-no-params",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"initialize\"}"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "text/plain; charset=utf-8"
+   },
+   "body": "invalid request: missing required \"params\"\n"
+  }
+ },
+ {
+  "name": "init-null-params",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"initialize\",\"params\":null}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"error\":{\"code\":0,\"message\":\"handling 'initialize': missing required \\\"params\\\"\"}}"
+  }
+ },
+ {
+  "name": "init-bad-params",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"initialize\",\"params\":{\"protocolVersion\":5}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"error\":{\"code\":0,\"message\":\"handling 'initialize': unmarshaling \\\"{\\\\\\\"protocolVersion\\\\\\\":5}\\\" into a *mcp.initializeParamsV2: json: cannot unmarshal \\\"5}\\\" into Go struct field mcp.initializeParamsV2.protocolVersion of type string\"}}"
+  }
+ },
+ {
+  "name": "init-header-0618",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream",
+    "Mcp-Protocol-Version": "2025-06-18"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"initialize\",\"params\":{\"protocolVersion\":\"2025-06-18\",\"capabilities\":{},\"clientInfo\":{\"name\":\"x\",\"version\":\"1\"}}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"capabilities\":{\"logging\":{},\"tools\":{\"listChanged\":true}},\"instructions\":\"$INSTRUCTIONS\",\"protocolVersion\":\"2025-06-18\",\"serverInfo\":{\"name\":\"etherchat\",\"title\":\"Etherchat\",\"version\":\"test\"}}}"
+  }
+ },
+ {
+  "name": "tools-list-noparams",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/list\"}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"ttlMs\":0,\"cacheScope\":\"public\",\"tools\":\"$TOOLS\"}}"
+  }
+ },
+ {
+  "name": "tools-list-cursor",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/list\",\"params\":{\"cursor\":\"abc\"}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"error\":{\"code\":-32602,\"message\":\"invalid params\"}}"
+  }
+ },
+ {
+  "name": "tools-list-bad-params",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/list\",\"params\":{\"cursor\":5}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"error\":{\"code\":-32602,\"message\":\"handling 'tools/list': invalid params: unmarshaling \\\"{\\\\\\\"cursor\\\\\\\":5}\\\" into a *mcp.ListToolsParams: json: cannot unmarshal \\\"5}\\\" into Go struct field mcp.ListToolsParams.cursor of type string\"}}"
+  }
+ },
+ {
+  "name": "prompts-list",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"prompts/list\"}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"ttlMs\":0,\"cacheScope\":\"public\",\"prompts\":[]}}"
+  }
+ },
+ {
+  "name": "resources-list",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"resources/list\"}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"ttlMs\":0,\"cacheScope\":\"public\",\"resources\":[]}}"
+  }
+ },
+ {
+  "name": "templates-list",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"resources/templates/list\"}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"ttlMs\":0,\"cacheScope\":\"public\",\"resourceTemplates\":[]}}"
+  }
+ },
+ {
+  "name": "resources-read",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"resources/read\",\"params\":{\"uri\":\"file:///x\"}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"error\":{\"code\":-32602,\"message\":\"Resource not found\",\"data\":{\"uri\":\"file:///x\"}}}"
+  }
+ },
+ {
+  "name": "prompts-get",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"prompts/get\",\"params\":{\"name\":\"x\"}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"error\":{\"code\":-32602,\"message\":\"unknown prompt \\\"x\\\"\"}}"
+  }
+ },
+ {
+  "name": "complete",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"completion/complete\",\"params\":{\"ref\":{\"type\":\"ref/prompt\",\"name\":\"x\"},\"argument\":{\"name\":\"a\",\"value\":\"b\"}}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"error\":{\"code\":-32601,\"message\":\"method not found: \\\"completion/complete\\\"\"}}"
+  }
+ },
+ {
+  "name": "set-level",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"logging/setLevel\",\"params\":{\"level\":\"debug\"}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{}}"
+  }
+ },
+ {
+  "name": "subscribe",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"resources/subscribe\",\"params\":{\"uri\":\"file:///x\"}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"error\":{\"code\":-32601,\"message\":\"method not found: \\\"resources/subscribe\\\"\"}}"
+  }
+ },
+ {
+  "name": "unsubscribe",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"resources/unsubscribe\",\"params\":{\"uri\":\"file:///x\"}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"error\":{\"code\":-32601,\"message\":\"method not found: \\\"resources/unsubscribe\\\"\"}}"
+  }
+ },
+ {
+  "name": "discover-old",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"server/discover\"}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"error\":{\"code\":-32601,\"message\":\"method not found: \\\"server/discover\\\"\"}}"
+  }
+ },
+ {
+  "name": "listen-old",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"subscriptions/listen\",\"params\":{\"notifications\":{}}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "text/event-stream",
+    "cache-control": "no-cache, no-transform",
+    "connection": "keep-alive"
+   },
+   "body": "event: message\ndata: {\"jsonrpc\":\"2.0\",\"method\":\"notifications/subscriptions/acknowledged\",\"params\":{\"_meta\":{\"io.modelcontextprotocol/subscriptionId\":1},\"notifications\":{}}}\n\nevent: message\ndata: {\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"_meta\":{\"io.modelcontextprotocol/subscriptionId\":1}}}\n\n"
+  }
+ },
+ {
+  "name": "call-no-params",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\"}"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "text/plain; charset=utf-8"
+   },
+   "body": "invalid request: missing required \"params\"\n"
+  }
+ },
+ {
+  "name": "call-null-params",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":null}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"error\":{\"code\":-32600,\"message\":\"handling 'tools/call': invalid request: missing required \\\"params\\\"\"}}"
+  }
+ },
+ {
+  "name": "call-empty-params",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"error\":{\"code\":-32602,\"message\":\"unknown tool \\\"\\\"\"}}"
+  }
+ },
+ {
+  "name": "call-unknown-tool",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"nope\"}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"error\":{\"code\":-32602,\"message\":\"unknown tool \\\"nope\\\"\"}}"
+  }
+ },
+ {
+  "name": "call-name-number",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":5}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"error\":{\"code\":-32602,\"message\":\"handling 'tools/call': invalid params: unmarshaling \\\"{\\\\\\\"name\\\\\\\":5}\\\" into a *mcp.CallToolParamsRaw: json: cannot unmarshal \\\"5}\\\" into Go struct field mcp.CallToolParamsRaw.name of type string\"}}"
+  }
+ },
+ {
+  "name": "call-args-array",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"list_ethers\",\"arguments\":[]}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"validating \\\"arguments\\\": unmarshaling arguments: json: cannot unmarshal \\\"[]\\\" into Go value of type map[string]interface {}\"}],\"isError\":true}}"
+  }
+ },
+ {
+  "name": "call-args-string",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"list_ethers\",\"arguments\":\"x\"}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"validating \\\"arguments\\\": unmarshaling arguments: json: cannot unmarshal \\\"\\\\\\\"x\\\\\\\"\\\" into Go value of type map[string]interface {}\"}],\"isError\":true}}"
+  }
+ },
+ {
+  "name": "call-args-null",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"list_ethers\",\"arguments\":null}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\\\"ethers\\\":[],\\\"pending_invites\\\":[],\\\"your_handle\\\":\\\"@owner\\\"}\"}],\"structuredContent\":{\"ethers\":[],\"pending_invites\":[],\"your_handle\":\"@owner\"}}}"
+  }
+ },
+ {
+  "name": "call-list-ethers-noargs",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"list_ethers\"}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\\\"ethers\\\":[],\\\"pending_invites\\\":[],\\\"your_handle\\\":\\\"@owner\\\"}\"}],\"structuredContent\":{\"ethers\":[],\"pending_invites\":[],\"your_handle\":\"@owner\"}}}"
+  }
+ },
+ {
+  "name": "call-list-ethers-extra",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"list_ethers\",\"arguments\":{\"x\":1}}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"validating \\\"arguments\\\": validating root: unexpected additional properties [\\\"x\\\"]\"}],\"isError\":true}}"
+  }
+ },
+ {
+  "name": "call-missing-required",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"write_file\",\"arguments\":{\"ether\":\"e\",\"path\":\"shared/x.md\",\"content\":\"x\"}}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"validating \\\"arguments\\\": validating root: required: missing properties: [\\\"expected_version\\\"]\"}],\"isError\":true}}"
+  }
+ },
+ {
+  "name": "call-missing-2",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"write_file\",\"arguments\":{}}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"validating \\\"arguments\\\": validating root: required: missing properties: [\\\"ether\\\" \\\"path\\\" \\\"content\\\" \\\"expected_version\\\"]\"}],\"isError\":true}}"
+  }
+ },
+ {
+  "name": "call-wrong-type",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"write_file\",\"arguments\":{\"ether\":5,\"path\":\"shared/x.md\",\"content\":\"x\",\"expected_version\":0}}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"validating \\\"arguments\\\": validating root: validating /properties/ether: type: 5 has type \\\"integer\\\", want \\\"string\\\"\"}],\"isError\":true}}"
+  }
+ },
+ {
+  "name": "call-wrong-int",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"write_file\",\"arguments\":{\"ether\":\"e\",\"path\":\"shared/x.md\",\"content\":\"x\",\"expected_version\":1.5}}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"validating \\\"arguments\\\": validating root: validating /properties/expected_version: type: 1.5 has type \\\"number\\\", want \\\"integer\\\"\"}],\"isError\":true}}"
+  }
+ },
+ {
+  "name": "call-int-string",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"write_file\",\"arguments\":{\"ether\":\"e\",\"path\":\"shared/x.md\",\"content\":\"x\",\"expected_version\":\"0\"}}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"validating \\\"arguments\\\": validating root: validating /properties/expected_version: type: 0 has type \\\"string\\\", want \\\"integer\\\"\"}],\"isError\":true}}"
+  }
+ },
+ {
+  "name": "call-int-float-whole",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"write_file\",\"arguments\":{\"ether\":\"e\",\"path\":\"shared/x.md\",\"content\":\"x\",\"expected_version\":2.0}}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"not found (or you aren't a member of that ether)\"}],\"isError\":true}}"
+  }
+ },
+ {
+  "name": "call-int-huge",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"write_file\",\"arguments\":{\"ether\":\"e\",\"path\":\"shared/x.md\",\"content\":\"x\",\"expected_version\":1e30}}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"json: cannot unmarshal \\\"1e+30\\\" into Go struct field mcpserver.writeFileIn.expected_version of type int64\"}],\"isError\":true}}"
+  }
+ },
+ {
+  "name": "call-extra-prop",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"write_file\",\"arguments\":{\"ether\":\"e\",\"path\":\"shared/x.md\",\"content\":\"x\",\"expected_version\":0,\"bogus\":1}}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"validating \\\"arguments\\\": validating root: unexpected additional properties [\\\"bogus\\\"]\"}],\"isError\":true}}"
+  }
+ },
+ {
+  "name": "call-null-value",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"write_file\",\"arguments\":{\"ether\":null,\"path\":\"shared/x.md\",\"content\":\"x\",\"expected_version\":0}}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"validating \\\"arguments\\\": validating root: validating /properties/ether: type: \\u003cinvalid reflect.Value\\u003e has type \\\"null\\\", want \\\"string\\\"\"}],\"isError\":true}}"
+  }
+ },
+ {
+  "name": "call-null-optional",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"list_files\",\"arguments\":{\"ether\":\"e\",\"path\":null}}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"validating \\\"arguments\\\": validating root: validating /properties/path: type: \\u003cinvalid reflect.Value\\u003e has type \\\"null\\\", want \\\"string\\\"\"}],\"isError\":true}}"
+  }
+ },
+ {
+  "name": "call-bool-wrong",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"list_files\",\"arguments\":{\"ether\":\"e\",\"recursive\":\"yes\"}}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"validating \\\"arguments\\\": validating root: validating /properties/recursive: type: yes has type \\\"string\\\", want \\\"boolean\\\"\"}],\"isError\":true}}"
+  }
+ },
+ {
+  "name": "call-array-wrong",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"ask\",\"arguments\":{\"ether\":\"e\",\"to\":\"bob\",\"title\":\"t\"}}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"validating \\\"arguments\\\": validating root: validating /properties/to: type: bob has type \\\"string\\\", want one of \\\"null, array\\\"\"}],\"isError\":true}}"
+  }
+ },
+ {
+  "name": "call-array-item-wrong",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"ask\",\"arguments\":{\"ether\":\"e\",\"to\":[1],\"title\":\"t\"}}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"validating \\\"arguments\\\": validating root: validating /properties/to: validating /properties/to/items: type: 1 has type \\\"integer\\\", want \\\"string\\\"\"}],\"isError\":true}}"
+  }
+ },
+ {
+  "name": "call-array-null",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"ask\",\"arguments\":{\"ether\":\"e\",\"to\":null,\"title\":\"t\"}}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"invalid request: say who to ask: one or more members' handles\"}],\"isError\":true}}"
+  }
+ },
+ {
+  "name": "call-two-errors",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"write_file\",\"arguments\":{\"ether\":5,\"path\":6,\"content\":\"x\",\"expected_version\":0}}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"validating \\\"arguments\\\": validating root: validating /properties/ether: type: 5 has type \\\"integer\\\", want \\\"string\\\"\"}],\"isError\":true}}"
+  }
+ },
+ {
+  "name": "call-missing-and-extra",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"leave_ether\",\"arguments\":{\"bogus\":1}}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"validating \\\"arguments\\\": validating root: unexpected additional properties [\\\"bogus\\\"]\"}],\"isError\":true}}"
+  }
+ },
+ {
+  "name": "call-not-member",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"read_file\",\"arguments\":{\"ether\":\"nosuch\",\"path\":\"shared/x.md\"}}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"not found (or you aren't a member of that ether)\"}],\"isError\":true}}"
+  }
+ },
+ {
+  "name": "call-bad-since",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"read_board\",\"arguments\":{\"ether\":\"nosuch\",\"since\":\"yesterday\"}}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"invalid request: since must be an RFC 3339 time like 2026-10-09T16:00:00Z\"}],\"isError\":true}}"
+  }
+ },
+ {
+  "name": "call-meta",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"list_ethers\",\"arguments\":{},\"_meta\":{\"progressToken\":1}}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\\\"ethers\\\":[],\\\"pending_invites\\\":[],\\\"your_handle\\\":\\\"@owner\\\"}\"}],\"structuredContent\":{\"ethers\":[],\"pending_invites\":[],\"your_handle\":\"@owner\"}}}"
+  }
+ },
+ {
+  "name": "call-extra-param-field",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"list_ethers\",\"arguments\":{},\"task\":{\"ttl\":1}}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\\\"ethers\\\":[],\\\"pending_invites\\\":[],\\\"your_handle\\\":\\\"@owner\\\"}\"}],\"structuredContent\":{\"ethers\":[],\"pending_invites\":[],\"your_handle\":\"@owner\"}}}"
+  }
+ },
+ {
+  "name": "batch-old",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "[{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"ping\"},{\"jsonrpc\":\"2.0\",\"id\":2,\"method\":\"tools/list\"}]"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "[{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{}},{\"jsonrpc\":\"2.0\",\"id\":2,\"result\":{\"ttlMs\":0,\"cacheScope\":\"public\",\"tools\":\"$TOOLS\"}}]"
+  }
+ },
+ {
+  "name": "batch-one",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "[{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"ping\"}]"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "[{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{}}]"
+  }
+ },
+ {
+  "name": "batch-notif-only",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "[{\"jsonrpc\":\"2.0\",\"method\":\"notifications/initialized\"}]"
+  },
+  "response": {
+   "status": 202,
+   "headers": {},
+   "body": ""
+  }
+ },
+ {
+  "name": "batch-mixed",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "[{\"jsonrpc\":\"2.0\",\"method\":\"notifications/initialized\"},{\"jsonrpc\":\"2.0\",\"id\":\"x\",\"method\":\"ping\"}]"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "[{\"jsonrpc\":\"2.0\",\"id\":\"x\",\"result\":{}}]"
+  }
+ },
+ {
+  "name": "batch-empty",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "[]"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "text/plain; charset=utf-8"
+   },
+   "body": "malformed payload: empty batch\n"
+  }
+ },
+ {
+  "name": "batch-bad-member",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "[{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"ping\"}, 5]"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "text/plain; charset=utf-8"
+   },
+   "body": "malformed payload: unmarshaling jsonrpc message: json: cannot unmarshal \"5\" into Go value of type jsonrpc2.wireDecode\n"
+  }
+ },
+ {
+  "name": "batch-0618",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream",
+    "Mcp-Protocol-Version": "2025-06-18"
+   },
+   "body": "[{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"ping\"}]"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "text/plain; charset=utf-8"
+   },
+   "body": "JSON-RPC batching is not supported in 2025-06-18 and later (request version: 2025-06-18)\n"
+  }
+ },
+ {
+  "name": "batch-0326",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream",
+    "Mcp-Protocol-Version": "2025-03-26"
+   },
+   "body": "[{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"ping\"},{\"jsonrpc\":\"2.0\",\"id\":2,\"method\":\"foo\"}]"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "text/plain; charset=utf-8"
+   },
+   "body": "JSON RPC not handled: \"foo\" unsupported\n"
+  }
+ },
+ {
+  "name": "batch-dup-ids",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "[{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"ping\"},{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"ping\"}]"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "[{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{}}]"
+  }
+ },
+ {
+  "name": "batch-init",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "[{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"initialize\",\"params\":{\"protocolVersion\":\"2025-03-26\",\"capabilities\":{},\"clientInfo\":{\"name\":\"x\",\"version\":\"1\"}}},{\"jsonrpc\":\"2.0\",\"id\":2,\"method\":\"tools/list\"}]"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "[{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"capabilities\":{\"logging\":{},\"tools\":{\"listChanged\":true}},\"instructions\":\"$INSTRUCTIONS\",\"protocolVersion\":\"2025-03-26\",\"serverInfo\":{\"name\":\"etherchat\",\"title\":\"Etherchat\",\"version\":\"test\"}}},{\"jsonrpc\":\"2.0\",\"id\":2,\"result\":{\"ttlMs\":0,\"cacheScope\":\"public\",\"tools\":\"$TOOLS\"}}]"
+  }
+ },
+ {
+  "name": "batch-init-initialized",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "[{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"initialize\",\"params\":{\"protocolVersion\":\"2025-03-26\",\"capabilities\":{},\"clientInfo\":{\"name\":\"x\",\"version\":\"1\"}}},{\"jsonrpc\":\"2.0\",\"method\":\"notifications/initialized\"},{\"jsonrpc\":\"2.0\",\"id\":2,\"method\":\"tools/list\"}]"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "[{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"capabilities\":{\"logging\":{},\"tools\":{\"listChanged\":true}},\"instructions\":\"$INSTRUCTIONS\",\"protocolVersion\":\"2025-03-26\",\"serverInfo\":{\"name\":\"etherchat\",\"title\":\"Etherchat\",\"version\":\"test\"}}},{\"jsonrpc\":\"2.0\",\"id\":2,\"result\":{\"ttlMs\":0,\"cacheScope\":\"public\",\"tools\":\"$TOOLS\"}}]"
+  }
+ },
+ {
+  "name": "batch-two-calls",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "[{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"list_ethers\"}},{\"jsonrpc\":\"2.0\",\"id\":2,\"method\":\"tools/call\",\"params\":{\"name\":\"nope\"}}]"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "[{\"jsonrpc\":\"2.0\",\"id\":2,\"error\":{\"code\":-32602,\"message\":\"unknown tool \\\"nope\\\"\"}},{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\\\"ethers\\\":[],\\\"pending_invites\\\":[],\\\"your_handle\\\":\\\"@owner\\\"}\"}],\"structuredContent\":{\"ethers\":[],\"pending_invites\":[],\"your_handle\":\"@owner\"}}}]"
+  }
+ },
+ {
+  "name": "last-event-id",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream",
+    "Last-Event-ID": "x_1"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"ping\"}"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "text/plain; charset=utf-8"
+   },
+   "body": "can't send Last-Event-ID for POST request\n"
+  }
+ },
+ {
+  "name": "session-id-header",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream",
+    "Mcp-Session-Id": "abc"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"ping\"}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{}}"
+  }
+ },
+ {
+  "name": "new-discover",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream",
+    "Mcp-Protocol-Version": "2026-07-28",
+    "Mcp-Method": "server/discover"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"server/discover\",\"params\":{\"_meta\":{\"io.modelcontextprotocol/protocolVersion\":\"2026-07-28\",\"io.modelcontextprotocol/clientCapabilities\":{},\"io.modelcontextprotocol/clientInfo\":{\"name\":\"c\",\"version\":\"1\"}}}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"resultType\":\"complete\",\"_meta\":{\"io.modelcontextprotocol/serverInfo\":{\"name\":\"etherchat\",\"title\":\"Etherchat\",\"version\":\"test\"}},\"ttlMs\":0,\"cacheScope\":\"public\",\"supportedVersions\":[\"2026-07-28\",\"2025-11-25\",\"2025-06-18\",\"2025-03-26\",\"2024-11-05\"],\"capabilities\":{\"logging\":{},\"tools\":{\"listChanged\":true}},\"instructions\":\"$INSTRUCTIONS\"}}"
+  }
+ },
+ {
+  "name": "new-discover-noparams",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream",
+    "Mcp-Protocol-Version": "2026-07-28",
+    "Mcp-Method": "server/discover"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"server/discover\"}"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"error\":{\"code\":-32602,\"message\":\"missing or invalid _meta field \\\"io.modelcontextprotocol/protocolVersion\\\"\"}}"
+  }
+ },
+ {
+  "name": "new-discover-nocaps",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream",
+    "Mcp-Protocol-Version": "2026-07-28",
+    "Mcp-Method": "server/discover"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"server/discover\",\"params\":{\"_meta\":{\"io.modelcontextprotocol/protocolVersion\":\"2026-07-28\"}}}"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"error\":{\"code\":-32602,\"message\":\"missing or invalid _meta field \\\"io.modelcontextprotocol/clientCapabilities\\\"\"}}"
+  }
+ },
+ {
+  "name": "new-discover-badclientinfo",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream",
+    "Mcp-Protocol-Version": "2026-07-28",
+    "Mcp-Method": "server/discover"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"server/discover\",\"params\":{\"_meta\":{\"io.modelcontextprotocol/protocolVersion\":\"2026-07-28\",\"io.modelcontextprotocol/clientCapabilities\":{},\"io.modelcontextprotocol/clientInfo\":5}}}"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"error\":{\"code\":-32602,\"message\":\"invalid _meta field \\\"io.modelcontextprotocol/clientInfo\\\"\"}}"
+  }
+ },
+ {
+  "name": "new-discover-noheader",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"server/discover\",\"params\":{\"_meta\":{\"io.modelcontextprotocol/protocolVersion\":\"2026-07-28\",\"io.modelcontextprotocol/clientCapabilities\":{}}}}"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"error\":{\"code\":-32020,\"message\":\"Mcp-Protocol-Version header is required for requests carrying \\\"io.modelcontextprotocol/protocolVersion\\\"\"}}"
+  }
+ },
+ {
+  "name": "new-discover-mismatch",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream",
+    "Mcp-Protocol-Version": "2025-06-18",
+    "Mcp-Method": "server/discover"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"server/discover\",\"params\":{\"_meta\":{\"io.modelcontextprotocol/protocolVersion\":\"2026-07-28\",\"io.modelcontextprotocol/clientCapabilities\":{}}}}"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"error\":{\"code\":-32020,\"message\":\"Mcp-Protocol-Version header \\\"2025-06-18\\\" does not match request io.modelcontextprotocol/protocolVersion \\\"2026-07-28\\\"\"}}"
+  }
+ },
+ {
+  "name": "new-discover-no-method-header",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream",
+    "Mcp-Protocol-Version": "2026-07-28"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"server/discover\",\"params\":{\"_meta\":{\"io.modelcontextprotocol/protocolVersion\":\"2026-07-28\",\"io.modelcontextprotocol/clientCapabilities\":{}}}}"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"error\":{\"code\":-32020,\"message\":\"missing required Mcp-Method header\"}}"
+  }
+ },
+ {
+  "name": "new-discover-wrong-method-header",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream",
+    "Mcp-Protocol-Version": "2026-07-28",
+    "Mcp-Method": "tools/list"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"server/discover\",\"params\":{\"_meta\":{\"io.modelcontextprotocol/protocolVersion\":\"2026-07-28\",\"io.modelcontextprotocol/clientCapabilities\":{}}}}"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"error\":{\"code\":-32020,\"message\":\"header mismatch: Mcp-Method header value 'tools/list' does not match body value 'server/discover'\"}}"
+  }
+ },
+ {
+  "name": "new-tools-list",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream",
+    "Mcp-Protocol-Version": "2026-07-28",
+    "Mcp-Method": "tools/list"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/list\",\"params\":{\"_meta\":{\"io.modelcontextprotocol/protocolVersion\":\"2026-07-28\",\"io.modelcontextprotocol/clientCapabilities\":{}}}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"resultType\":\"complete\",\"_meta\":{\"io.modelcontextprotocol/serverInfo\":{\"name\":\"etherchat\",\"title\":\"Etherchat\",\"version\":\"test\"}},\"ttlMs\":0,\"cacheScope\":\"public\",\"tools\":\"$TOOLS\"}}"
+  }
+ },
+ {
+  "name": "new-ping",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream",
+    "Mcp-Protocol-Version": "2026-07-28",
+    "Mcp-Method": "ping"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"ping\",\"params\":{\"_meta\":{\"io.modelcontextprotocol/protocolVersion\":\"2026-07-28\",\"io.modelcontextprotocol/clientCapabilities\":{}}}}"
+  },
+  "response": {
+   "status": 404,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"error\":{\"code\":-32601,\"message\":\"method not found: \\\"ping\\\"\"}}"
+  }
+ },
+ {
+  "name": "new-initialize",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream",
+    "Mcp-Protocol-Version": "2026-07-28",
+    "Mcp-Method": "initialize"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"initialize\",\"params\":{\"protocolVersion\":\"2026-07-28\",\"capabilities\":{},\"clientInfo\":{\"name\":\"x\",\"version\":\"1\"},\"_meta\":{\"io.modelcontextprotocol/protocolVersion\":\"2026-07-28\",\"io.modelcontextprotocol/clientCapabilities\":{}}}}"
+  },
+  "response": {
+   "status": 404,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"error\":{\"code\":-32601,\"message\":\"method not found: \\\"initialize\\\"\"}}"
+  }
+ },
+ {
+  "name": "new-unknown",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream",
+    "Mcp-Protocol-Version": "2026-07-28",
+    "Mcp-Method": "foo/bar"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"foo/bar\",\"params\":{\"_meta\":{\"io.modelcontextprotocol/protocolVersion\":\"2026-07-28\",\"io.modelcontextprotocol/clientCapabilities\":{}}}}"
+  },
+  "response": {
+   "status": 404,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"error\":{\"code\":-32601,\"message\":\"JSON RPC not handled: \\\"foo/bar\\\" unsupported\"}}"
+  }
+ },
+ {
+  "name": "new-unknown-notif",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream",
+    "Mcp-Protocol-Version": "2026-07-28",
+    "Mcp-Method": "notifications/foo"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"method\":\"notifications/foo\"}"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "text/plain; charset=utf-8"
+   },
+   "body": "JSON RPC not handled: \"notifications/foo\" unsupported\n"
+  }
+ },
+ {
+  "name": "new-notif",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream",
+    "Mcp-Protocol-Version": "2026-07-28",
+    "Mcp-Method": "notifications/initialized"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"method\":\"notifications/initialized\"}"
+  },
+  "response": {
+   "status": 202,
+   "headers": {},
+   "body": ""
+  }
+ },
+ {
+  "name": "new-notif-nomethodheader",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream",
+    "Mcp-Protocol-Version": "2026-07-28"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"method\":\"notifications/initialized\"}"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32020,\"message\":\"missing required Mcp-Method header\"}}"
+  }
+ },
+ {
+  "name": "new-call",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream",
+    "Mcp-Protocol-Version": "2026-07-28",
+    "Mcp-Method": "tools/call",
+    "Mcp-Name": "list_ethers"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"list_ethers\",\"arguments\":{},\"_meta\":{\"io.modelcontextprotocol/protocolVersion\":\"2026-07-28\",\"io.modelcontextprotocol/clientCapabilities\":{}}}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"_meta\":{\"io.modelcontextprotocol/serverInfo\":{\"name\":\"etherchat\",\"title\":\"Etherchat\",\"version\":\"test\"}},\"content\":[{\"type\":\"text\",\"text\":\"{\\\"ethers\\\":[],\\\"pending_invites\\\":[],\\\"your_handle\\\":\\\"@owner\\\"}\"}],\"structuredContent\":{\"ethers\":[],\"pending_invites\":[],\"your_handle\":\"@owner\"},\"resultType\":\"complete\"}}"
+  }
+ },
+ {
+  "name": "new-call-no-name-header",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream",
+    "Mcp-Protocol-Version": "2026-07-28",
+    "Mcp-Method": "tools/call"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"list_ethers\",\"arguments\":{},\"_meta\":{\"io.modelcontextprotocol/protocolVersion\":\"2026-07-28\",\"io.modelcontextprotocol/clientCapabilities\":{}}}}"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"error\":{\"code\":-32020,\"message\":\"missing required Mcp-Name header for method \\\"tools/call\\\"\"}}"
+  }
+ },
+ {
+  "name": "new-call-name-mismatch",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream",
+    "Mcp-Protocol-Version": "2026-07-28",
+    "Mcp-Method": "tools/call",
+    "Mcp-Name": "pull"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"list_ethers\",\"arguments\":{},\"_meta\":{\"io.modelcontextprotocol/protocolVersion\":\"2026-07-28\",\"io.modelcontextprotocol/clientCapabilities\":{}}}}"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"error\":{\"code\":-32020,\"message\":\"header mismatch: Mcp-Name header value 'pull' does not match body value 'list_ethers'\"}}"
+  }
+ },
+ {
+  "name": "new-call-unknown-tool",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream",
+    "Mcp-Protocol-Version": "2026-07-28",
+    "Mcp-Method": "tools/call",
+    "Mcp-Name": "nope"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"nope\",\"_meta\":{\"io.modelcontextprotocol/protocolVersion\":\"2026-07-28\",\"io.modelcontextprotocol/clientCapabilities\":{}}}}"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"error\":{\"code\":-32602,\"message\":\"unknown tool \\\"nope\\\"\"}}"
+  }
+ },
+ {
+  "name": "new-call-tool-error",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream",
+    "Mcp-Protocol-Version": "2026-07-28",
+    "Mcp-Method": "tools/call",
+    "Mcp-Name": "read_file"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"read_file\",\"arguments\":{\"ether\":\"x\",\"path\":\"shared/a.md\"},\"_meta\":{\"io.modelcontextprotocol/protocolVersion\":\"2026-07-28\",\"io.modelcontextprotocol/clientCapabilities\":{}}}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"_meta\":{\"io.modelcontextprotocol/serverInfo\":{\"name\":\"etherchat\",\"title\":\"Etherchat\",\"version\":\"test\"}},\"content\":[{\"type\":\"text\",\"text\":\"not found (or you aren't a member of that ether)\"}],\"isError\":true,\"resultType\":\"complete\"}}"
+  }
+ },
+ {
+  "name": "new-call-invalid-args",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream",
+    "Mcp-Protocol-Version": "2026-07-28",
+    "Mcp-Method": "tools/call",
+    "Mcp-Name": "read_file"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"read_file\",\"arguments\":{},\"_meta\":{\"io.modelcontextprotocol/protocolVersion\":\"2026-07-28\",\"io.modelcontextprotocol/clientCapabilities\":{}}}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"_meta\":{\"io.modelcontextprotocol/serverInfo\":{\"name\":\"etherchat\",\"title\":\"Etherchat\",\"version\":\"test\"}},\"content\":[{\"type\":\"text\",\"text\":\"validating \\\"arguments\\\": validating root: required: missing properties: [\\\"ether\\\" \\\"path\\\"]\"}],\"isError\":true,\"resultType\":\"complete\"}}"
+  }
+ },
+ {
+  "name": "new-call-no-meta",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream",
+    "Mcp-Protocol-Version": "2026-07-28",
+    "Mcp-Method": "tools/call",
+    "Mcp-Name": "list_ethers"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"list_ethers\",\"arguments\":{}}}"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"error\":{\"code\":-32602,\"message\":\"missing or invalid _meta field \\\"io.modelcontextprotocol/protocolVersion\\\"\"}}"
+  }
+ },
+ {
+  "name": "new-call-no-params",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream",
+    "Mcp-Protocol-Version": "2026-07-28",
+    "Mcp-Method": "tools/call",
+    "Mcp-Name": "list_ethers"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\"}"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "text/plain; charset=utf-8"
+   },
+   "body": "invalid request: missing required \"params\"\n"
+  }
+ },
+ {
+  "name": "new-call-bad-params",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream",
+    "Mcp-Protocol-Version": "2026-07-28",
+    "Mcp-Method": "tools/call",
+    "Mcp-Name": "list_ethers"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"list_ethers\",\"arguments\":5,\"_meta\":{\"io.modelcontextprotocol/protocolVersion\":\"2026-07-28\",\"io.modelcontextprotocol/clientCapabilities\":{}}}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"_meta\":{\"io.modelcontextprotocol/serverInfo\":{\"name\":\"etherchat\",\"title\":\"Etherchat\",\"version\":\"test\"}},\"content\":[{\"type\":\"text\",\"text\":\"validating \\\"arguments\\\": unmarshaling arguments: json: cannot unmarshal \\\"5\\\" into Go value of type map[string]interface {}\"}],\"isError\":true,\"resultType\":\"complete\"}}"
+  }
+ },
+ {
+  "name": "new-meta-old-version",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream",
+    "Mcp-Protocol-Version": "2026-07-28",
+    "Mcp-Method": "tools/list"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/list\",\"params\":{\"_meta\":{\"io.modelcontextprotocol/protocolVersion\":\"2025-06-18\",\"io.modelcontextprotocol/clientCapabilities\":{}}}}"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"error\":{\"code\":-32020,\"message\":\"Mcp-Protocol-Version header \\\"2026-07-28\\\" does not match request io.modelcontextprotocol/protocolVersion \\\"2025-06-18\\\"\"}}"
+  }
+ },
+ {
+  "name": "new-loglevel",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream",
+    "Mcp-Protocol-Version": "2026-07-28",
+    "Mcp-Method": "tools/list"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/list\",\"params\":{\"_meta\":{\"io.modelcontextprotocol/protocolVersion\":\"2026-07-28\",\"io.modelcontextprotocol/clientCapabilities\":{},\"io.modelcontextprotocol/logLevel\":\"debug\"}}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"resultType\":\"complete\",\"_meta\":{\"io.modelcontextprotocol/serverInfo\":{\"name\":\"etherchat\",\"title\":\"Etherchat\",\"version\":\"test\"}},\"ttlMs\":0,\"cacheScope\":\"public\",\"tools\":\"$TOOLS\"}}"
+  }
+ },
+ {
+  "name": "new-batch",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream",
+    "Mcp-Protocol-Version": "2026-07-28",
+    "Mcp-Method": "ping"
+   },
+   "body": "[{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/list\",\"params\":{\"_meta\":{\"io.modelcontextprotocol/protocolVersion\":\"2026-07-28\",\"io.modelcontextprotocol/clientCapabilities\":{}}}}]"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "text/plain; charset=utf-8"
+   },
+   "body": "JSON-RPC batching is not supported in 2025-06-18 and later (request version: 2026-07-28)\n"
+  }
+ },
+ {
+  "name": "new-prompts-list",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream",
+    "Mcp-Protocol-Version": "2026-07-28",
+    "Mcp-Method": "prompts/list"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"prompts/list\",\"params\":{\"_meta\":{\"io.modelcontextprotocol/protocolVersion\":\"2026-07-28\",\"io.modelcontextprotocol/clientCapabilities\":{}}}}"
+  },
+  "response": {
+   "status": 200,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"resultType\":\"complete\",\"_meta\":{\"io.modelcontextprotocol/serverInfo\":{\"name\":\"etherchat\",\"title\":\"Etherchat\",\"version\":\"test\"}},\"ttlMs\":0,\"cacheScope\":\"public\",\"prompts\":[]}}"
+  }
+ },
+ {
+  "name": "new-resources-read",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream",
+    "Mcp-Protocol-Version": "2026-07-28",
+    "Mcp-Method": "resources/read",
+    "Mcp-Name": "file:///x"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"resources/read\",\"params\":{\"uri\":\"file:///x\",\"_meta\":{\"io.modelcontextprotocol/protocolVersion\":\"2026-07-28\",\"io.modelcontextprotocol/clientCapabilities\":{}}}}"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"error\":{\"code\":-32602,\"message\":\"Resource not found\",\"data\":{\"uri\":\"file:///x\"}}}"
+  }
+ },
+ {
+  "name": "new-setlevel",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream",
+    "Mcp-Protocol-Version": "2026-07-28",
+    "Mcp-Method": "logging/setLevel"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"logging/setLevel\",\"params\":{\"level\":\"debug\",\"_meta\":{\"io.modelcontextprotocol/protocolVersion\":\"2026-07-28\",\"io.modelcontextprotocol/clientCapabilities\":{}}}}"
+  },
+  "response": {
+   "status": 404,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"error\":{\"code\":-32601,\"message\":\"method not found: \\\"logging/setLevel\\\"\"}}"
+  }
+ },
+ {
+  "name": "new-meta-on-old-header",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream",
+    "Mcp-Protocol-Version": "2025-06-18"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/list\",\"params\":{\"_meta\":{\"io.modelcontextprotocol/protocolVersion\":\"2026-07-28\",\"io.modelcontextprotocol/clientCapabilities\":{}}}}"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"error\":{\"code\":-32020,\"message\":\"Mcp-Protocol-Version header \\\"2025-06-18\\\" does not match request io.modelcontextprotocol/protocolVersion \\\"2026-07-28\\\"\"}}"
+  }
+ },
+ {
+  "name": "old-meta-on-new-header",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream",
+    "Mcp-Protocol-Version": "2026-07-28",
+    "Mcp-Method": "tools/list"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/list\",\"params\":{\"_meta\":{\"io.modelcontextprotocol/protocolVersion\":\"2025-06-18\"}}}"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"error\":{\"code\":-32020,\"message\":\"Mcp-Protocol-Version header \\\"2026-07-28\\\" does not match request io.modelcontextprotocol/protocolVersion \\\"2025-06-18\\\"\"}}"
+  }
+ },
+ {
+  "name": "meta-version-number",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream",
+    "Mcp-Protocol-Version": "2026-07-28",
+    "Mcp-Method": "tools/list"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/list\",\"params\":{\"_meta\":{\"io.modelcontextprotocol/protocolVersion\":5}}}"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"error\":{\"code\":-32602,\"message\":\"missing or invalid _meta field \\\"io.modelcontextprotocol/protocolVersion\\\"\"}}"
+  }
+ },
+ {
+  "name": "new-caps-invalid",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream",
+    "Mcp-Protocol-Version": "2026-07-28",
+    "Mcp-Method": "tools/list"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/list\",\"params\":{\"_meta\":{\"io.modelcontextprotocol/protocolVersion\":\"2026-07-28\",\"io.modelcontextprotocol/clientCapabilities\":5}}}"
+  },
+  "response": {
+   "status": 400,
+   "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache, no-transform"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"error\":{\"code\":-32602,\"message\":\"missing or invalid _meta field \\\"io.modelcontextprotocol/clientCapabilities\\\"\"}}"
+  }
+ },
+ {
+  "name": "new-response-msg",
+  "request": {
+   "method": "POST",
+   "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/event-stream",
+    "Mcp-Protocol-Version": "2026-07-28"
+   },
+   "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{}}"
+  },
+  "response": {
+   "status": 202,
+   "headers": {},
+   "body": ""
+  }
+ }
+]

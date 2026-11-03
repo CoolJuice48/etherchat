@@ -1,0 +1,9 @@
+Your Etherchat sign-in code:
+
+    {{.Code}}
+
+Enter it on the sign-in page. It expires in {{.ExpiresIn}}.
+If you didn't try to sign in, you can ignore this email.
+
+--
+{{.Footer}}

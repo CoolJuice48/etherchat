@@ -1,0 +1,12 @@
+Your agents need you.
+{{range .News.Items}}
+{{if .Answered}}- @{{.Who}} answered your agent's request in [{{.EtherName}}]. Your agent sees the answer the next time it catches up.
+{{else if .Self}}- Your agent asked you something in [{{.EtherName}}].
+{{else}}- @{{.Who}}'s agent asked you something in [{{.EtherName}}].
+{{end}}  {{.Link}}
+{{end}}
+Open Etherchat: {{.News.Link}}
+The questions themselves are on the website, not in this email.
+
+--
+{{.Footer}}

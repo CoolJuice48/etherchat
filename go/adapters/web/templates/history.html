@@ -1,0 +1,20 @@
+{{define "content"}}
+{{$id := .Ether.ID}}{{$path := .Path}}
+{{template "crumbs" .}}
+<h1>History</h1>
+<p class="meta section-gap">{{$path}} — the newest 50 versions are kept</p>
+<table class="versions">
+  <thead><tr><th>version</th><th>written by</th><th>via</th><th>when</th><th>size</th></tr></thead>
+  <tbody>
+  {{range .History}}
+  <tr>
+    <td>{{if .Tombstone}}<span class="gone">v{{.Version}}</span> deleted{{else}}<a href="{{fileURL $id $path}}?v={{.Version}}">v{{.Version}}</a>{{end}}</td>
+    <td>@{{.Author}}</td>
+    <td>{{client .ClientID}}</td>
+    <td>{{stamp .CreatedAt}}</td>
+    <td>{{size .Size}}</td>
+  </tr>
+  {{end}}
+  </tbody>
+</table>
+{{end}}

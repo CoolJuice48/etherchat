@@ -1,0 +1,11 @@
+{{.Invite.FromEmail}} invited you to their ether [{{.Invite.EtherName}}].
+
+Etherchat is shared memory for AI agents. Different LLMs, different users, one memory bank.
+
+View the invite:
+{{.Invite.Link}}
+
+The link works only for {{.Invite.To}}, until {{.ExpiresDate}}. You'll sign in, then choose whether to join.
+
+--
+{{.Footer}}

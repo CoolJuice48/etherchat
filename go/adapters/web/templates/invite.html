@@ -1,0 +1,27 @@
+{{define "content"}}
+<section class="narrow">
+  <div class="panel">
+  {{with .Invite}}
+    <h1 class="invite-line">{{.InvitedByEmail}} invited you to their ether [{{.EtherName}}].</h1>
+    <p class="lede">Different LLMs, different users, one memory bank. This invite expires {{stamp .ExpiresAt}}.</p>
+    <form method="post">
+      {{if $.CanChangeHandle}}{{with $.Account}}
+      <label for="handle">your handle</label>
+      <input id="handle" name="handle" value="{{.Handle}}" maxlength="32" pattern="[a-z0-9][a-z0-9._\-]*" required>
+      <p class="fine under">Others see you as @handle. It can't change after you join.</p>
+      {{end}}{{else}}{{with $.Account}}
+      <p class="meta under">You'll join as @{{.Handle}}.</p>
+      {{end}}{{end}}
+      <div class="choices">
+        <button type="submit" name="decision" value="accept" class="primary">Enter the ether</button>
+        <button type="submit" name="decision" value="decline" class="link">decline</button>
+      </div>
+    </form>
+  {{else}}
+    <h1>This invite can't be used</h1>
+    <p class="lede">It may have expired, been used or withdrawn, or been sent to a different address than {{with .Account}}<strong>{{.Email}}</strong>{{end}}, the one you're signed in with.</p>
+    <p><a href="/">Your ethers</a></p>
+  {{end}}
+  </div>
+</section>
+{{end}}

@@ -1,0 +1,59 @@
+# Etherchat on Cloudflare Workers: one Worker in front of one Durable Object,
+# which keeps the whole instance (accounts, ethers, files, blobs) in its
+# SQLite storage. See src/run/worker.ts, and src/run/config.ts for every
+# setting.
+#
+# Deploy:
+#   npx wrangler login
+#   npx wrangler secret put PEPPER          # openssl rand -base64 32; never change it afterwards
+#   npx wrangler secret put RESEND_API_KEY  # when MAIL_PROVIDER = "resend"
+#   npx wrangler secret put ADMIN_TOKEN     # openssl rand -base64 32; enables /_admin/ (404 without it)
+#   npm run worker:deploy
+#
+# Then allow yourself (the first admin):
+#   curl -X POST -H "Authorization: Bearer $ADMIN_TOKEN" --data-urlencode email=you@example.com \
+#     -d admin=true https://etherchat.example/_admin/allow
+#
+# Local development (npm run worker:dev): put the secrets in .dev.vars, with
+# BASE_URL = "http://localhost:8787" and MAIL_PROVIDER = "log" to override the
+# vars below.
+
+name = "etherchat"
+main = "src/run/worker.ts"
+compatibility_date = "2026-10-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Serve on your own domain (DOMAIN below must match it), or delete this and
+# set BASE_URL to the workers.dev address instead of DOMAIN.
+routes = [{ pattern = "etherchat.example", custom_domain = true }]
+
+[[durable_objects.bindings]]
+name = "ETHERCHAT"
+class_name = "Etherchat"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["Etherchat"]
+
+# Scheduled posts and request emails every minute; maintenance hourly.
+[triggers]
+crons = ["* * * * *"]
+
+[observability]
+enabled = true
+
+[vars]
+# The public host. Requests for any other Host are refused (421).
+DOMAIN = "etherchat.example"
+# Or, instead of DOMAIN, the full origin, e.g. a workers.dev address:
+# BASE_URL = "https://etherchat.your-subdomain.workers.dev"
+TIMEZONE = "America/New_York"
+# resend, log (sign-in codes go to the Worker log; testing only), or "" (no sign-in).
+MAIL_PROVIDER = "resend"
+MAIL_FROM = "Etherchat <no-reply@etherchat.example>"
+# Limits, if not the defaults (MAX_MEMBERS = "4", INVITE_TTL = "168h", ...; see config.ts).
+
+# Secrets (wrangler secret put NAME; never in this file):
+#   PEPPER          at least 32 random bytes, base64 or hex; HMAC key for sign-in and invite codes
+#   RESEND_API_KEY  the Resend API key, when MAIL_PROVIDER = "resend"
+#   ADMIN_TOKEN     at least 32 characters; the bearer token for /_admin/ (unset: no admin endpoints)

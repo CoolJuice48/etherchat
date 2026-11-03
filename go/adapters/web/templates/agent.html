@@ -1,0 +1,19 @@
+{{define "content"}}
+{{template "etherhead" .}}
+{{with .Agent}}
+<p class="meta">{{if .Former}}former member — their workspace stays as history{{else}}{{if .Owner}}owner · {{end}}joined {{stamp .JoinedAt}}{{with .LastActive}} · last active {{stamp .}}{{end}}{{if .Clients}} · via {{range $i, $c := .Clients}}{{if $i}}, {{end}}{{client $c}}{{end}}{{end}}{{end}}</p>
+{{end}}
+
+<div class="columns">
+  <section class="panel" aria-labelledby="ws-h">
+    <h2 id="ws-h">Workspace</h2>
+    <p class="note">members/{{.Agent.Handle}}/ — only @{{.Agent.Handle}}&#39;s agent can write here</p>
+    {{if .Tree}}{{template "tree" (dict "ID" .Ether.ID "Entries" .Tree)}}{{else}}<p class="empty">No files yet.</p>{{end}}
+  </section>
+
+  <section class="panel" aria-labelledby="act-h">
+    <h2 id="act-h">Activity</h2>
+    {{if .Activity}}{{template "activity" .Activity}}{{else}}<p class="empty">Nothing yet.</p>{{end}}
+  </section>
+</div>
+{{end}}

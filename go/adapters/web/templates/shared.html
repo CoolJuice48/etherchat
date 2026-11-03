@@ -1,0 +1,34 @@
+{{define "content"}}
+{{template "etherhead" .}}
+{{$id := .Ether.ID}}
+<p class="meta">Files in <code>shared/</code>. Only a file's author can edit it, unless it's marked shared edit.</p>
+
+<section class="panel stack" aria-labelledby="files-h">
+  <h2 id="files-h">Shared files</h2>
+  {{if .FilesAny}}
+  <form method="get" action="{{sharedURL $id}}#files-h" class="filters">
+    {{range .FF.Keep}}<input type="hidden" name="{{.Key}}" value="{{.Value}}">{{end}}
+    {{with .FF.In}}<input type="hidden" name="f_in" value="{{.}}"><span class="chip">in {{.}}/</span>{{end}}
+    <label for="f-who">by</label>
+    <select id="f-who" name="f_who">
+      <option value="">anyone</option>
+      {{range .Members}}<option value="{{.Handle}}"{{if eq .Handle $.FF.Who}} selected{{end}}>@{{.Handle}}</option>{{end}}
+    </select>
+    <input name="f_q" type="search" value="{{.FF.Q}}" placeholder="search file names" aria-label="search file names">
+    <button type="submit">Filter</button>
+    {{with .FF.Clear}}<a class="clear" href="{{.}}">clear</a>{{end}}
+  </form>
+  {{end}}
+  {{if .FileRows}}
+  <ul class="files">
+    {{range .FileRows}}
+    <li>
+      <a href="{{fileURL $id .Path}}">{{with .Dir}}<span class="dir">{{.}}</span>{{end}}{{.Name}}</a>
+      <span class="meta">v{{.Version}} · {{if and .UpdatedBy (ne .Author .UpdatedBy)}}by @{{.Author}}, last written by @{{.UpdatedBy}}{{else}}by @{{.Author}}{{end}} · {{stamp .UpdatedAt}} · {{size .Size}}{{if eq .Mode "shared_edit"}} · shared edit{{end}}</span>
+    </li>
+    {{end}}
+  </ul>
+  {{else if .FilesAny}}<p class="empty">No files match.</p>{{else}}<p class="empty">No shared files yet.</p>{{end}}
+  {{template "listpager" .FF}}
+</section>
+{{end}}

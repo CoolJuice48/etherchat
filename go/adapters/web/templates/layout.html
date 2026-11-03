@@ -1,0 +1,31 @@
+{{define "layout"}}<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>{{.Title}} · etherchat</title>
+<link rel="stylesheet" href="{{cssURL}}">
+</head>
+<body>
+<header class="bar">
+  <a class="brand" href="/">etherchat</a>
+  {{with .Account}}
+  <a class="who" href="/account">@{{.Handle}}</a>
+  <form method="post" action="/logout" class="inline"><button type="submit" class="link">sign out</button></form>
+  {{end}}
+</header>
+<main>
+{{if .Error}}<p class="error" role="alert">{{.Error}}</p>{{end}}
+{{if and .NotAllowed .CanAskAdmin}}
+<form method="post" action="/allow-requests" class="ask-admin">
+  {{range .NotAllowed}}<input type="hidden" name="email" value="{{.}}">{{end}}
+  <input type="hidden" name="back" value="{{.AskBack}}">
+  <button type="submit">Ask the admin to allow {{if eq (len .NotAllowed) 1}}it{{else}}them{{end}}</button>
+</form>
+{{end}}
+{{if .Notice}}<p class="notice">{{.Notice}}</p>{{end}}
+{{template "content" .}}
+</main>
+</body>
+</html>{{end}}
